@@ -1,2 +1,2 @@
 # ChatsApp
-Chats based app in flutter 
+Chats based app in flutter with superbase and websocket. 
