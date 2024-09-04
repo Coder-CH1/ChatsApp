@@ -1,6 +1,7 @@
 import 'package:chatsapp/resusable_widgets/custom_color.dart';
 import 'package:flutter/material.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
+import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 
 class UserRegistration extends StatefulWidget {
   const UserRegistration({Key? key}) : super(key: key);
@@ -10,6 +11,8 @@ class UserRegistration extends StatefulWidget {
 }
 
 class _UserRegistrationState extends State<UserRegistration> {
+  String initialCountry = '';
+  PhoneNumber number = PhoneNumber(isoCode: '');
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -51,7 +54,7 @@ class _UserRegistrationState extends State<UserRegistration> {
                       textAlign: TextAlign.left,
                     ),
                     SizedBox(
-                      height: 40,
+                      height: 50,
                     ),
                     Text('Sign in with Phone Number', style: TextStyle(
                       fontSize: 24,
@@ -60,13 +63,16 @@ class _UserRegistrationState extends State<UserRegistration> {
                     ),
                     ),
                     IntlPhoneField(
+                      //focusNode: focusNode,
                       //dropdownIconPosition: IconPosition.trailing,
                       decoration: const InputDecoration(
                           labelText: 'Phone number',
                           hintText: 'phone number'
                       ),
-                      initialCountryCode: 'IN',
+                      initialCountryCode: '',
                       showCountryFlag: false,
+                      languageCode: 'en',
+                      autofocus: false,
                       onChanged: (phone) {
                         print(phone.completeNumber);
                       },
@@ -74,6 +80,30 @@ class _UserRegistrationState extends State<UserRegistration> {
                   ],
                 ),
             ),
+            // Padding(
+            //   padding: const EdgeInsets.only(left: 20, right: 20),
+            //   child: InternationalPhoneNumberInput(
+            //     onInputChanged: (PhoneNumber number) {
+            //       print(number.phoneNumber);
+            //     },
+            //     onInputValidated: (bool value) {
+            //       print(value);
+            //     },
+            //     selectorConfig: SelectorConfig(
+            //       selectorType: PhoneInputSelectorType.DROPDOWN,
+            //       useBottomSheetSafeArea: true,
+            //     ),
+            //     ignoreBlank: false,
+            //     autoValidateMode: AutovalidateMode.disabled,
+            //     selectorTextStyle: TextStyle(
+            //       color: Colors.black54,
+            //     ),
+            //     initialValue: number,
+            //     //textFieldController: controller,
+            //     formatInput: true,
+            //     keyboardType: TextInputType.numberWithOptions(signed: true, decimal: true),
+            //   ),
+            // ),
           SizedBox(
            height: 40,
           ),
