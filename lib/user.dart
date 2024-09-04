@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 
+import 'home.dart';
+
 class UserRegistration extends StatefulWidget {
   const UserRegistration({Key? key}) : super(key: key);
 
@@ -80,30 +82,6 @@ class _UserRegistrationState extends State<UserRegistration> {
                   ],
                 ),
             ),
-            // Padding(
-            //   padding: const EdgeInsets.only(left: 20, right: 20),
-            //   child: InternationalPhoneNumberInput(
-            //     onInputChanged: (PhoneNumber number) {
-            //       print(number.phoneNumber);
-            //     },
-            //     onInputValidated: (bool value) {
-            //       print(value);
-            //     },
-            //     selectorConfig: SelectorConfig(
-            //       selectorType: PhoneInputSelectorType.DROPDOWN,
-            //       useBottomSheetSafeArea: true,
-            //     ),
-            //     ignoreBlank: false,
-            //     autoValidateMode: AutovalidateMode.disabled,
-            //     selectorTextStyle: TextStyle(
-            //       color: Colors.black54,
-            //     ),
-            //     initialValue: number,
-            //     //textFieldController: controller,
-            //     formatInput: true,
-            //     keyboardType: TextInputType.numberWithOptions(signed: true, decimal: true),
-            //   ),
-            // ),
           SizedBox(
            height: 40,
           ),
@@ -115,7 +93,9 @@ class _UserRegistrationState extends State<UserRegistration> {
                 backgroundColor: Color(0xFFFFE81D)
               ),
                 onPressed: (){
-
+                  Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => const Home()),
+                  );
                 },
                 child: Text('Sign in', style: TextStyle(
                   color: Colors.black54,

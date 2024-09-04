@@ -11,8 +11,137 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Chats', style: TextStyle(
+          fontFamily: 'Caros',
+          color: Colors.black54,
+          fontWeight: FontWeight.bold,
+        )),
+      ),
+          body: ListView(
+            children: [
+              Card(
+                child: Row(
+                  children: [
+                    CircleAvatar(
+                      backgroundColor: Colors.yellow,
+                    ),
+                    SizedBox(width: 16),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(''),
+                        Text(''),
+                      ],
+                    ),
+                    Spacer(),
+                    Text(''),
+                  ],
+                ),
+              ),
+              Divider(),
+              Card(
+                child: Row(
+                  children: [
+                    CircleAvatar(
+                      backgroundColor: Colors.yellow,
+                    ),
+                    SizedBox(width: 16),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(''),
+                        Text(''),
+                      ],
+                    ),
+                    Spacer(),
+                    Text(''),
+                  ],
+                ),
+              ),
+              Divider(),
+              Card(
+                child: Row(
+                  children: [
+                    CircleAvatar(
+                      backgroundColor: Colors.yellow,
+                    ),
+                    SizedBox(width: 16),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(''),
+                        Text(''),
+                      ],
+                    ),
+                    Spacer(),
+                    Text(''),
+                  ],
+                ),
+              ),
+              Divider(),
+              Card(
+                child: Row(
+                  children: [
+                    CircleAvatar(
+                      backgroundColor: Colors.yellow,
+                    ),
+                    SizedBox(width: 16),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(''),
+                        Text(''),
+                      ],
+                    ),
+                    Spacer(),
+                    Text(''),
+                  ],
+                ),
+              ),
+              Divider(),
+              Card(
+                child: Row(
+                  children: [
+                    CircleAvatar(
+                      backgroundColor: Colors.yellow,
+                    ),
+                    SizedBox(width: 16),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(''),
+                        Text(''),
+                      ],
+                    ),
+                    Spacer(),
+                    Text(''),
+                  ],
+                ),
+              ),
+              Divider(),
+              Card(
+                child: Row(
+                  children: [
+                    CircleAvatar(
+                      backgroundColor: Colors.yellow,
+                    ),
+                    SizedBox(width: 16),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(''),
+                        Text(''),
+                      ],
+                    ),
+                    Spacer(),
+                    Text(''),
+                  ],
+                ),
+              )
+            ],
+          ),
     );
   }
 }
