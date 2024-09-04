@@ -17,127 +17,145 @@ class _HomeState extends State<Home> {
           fontFamily: 'Caros',
           color: Colors.black54,
           fontWeight: FontWeight.bold,
-        )),
+        ),),
       ),
           body: ListView(
             children: [
               Card(
-                child: Row(
-                  children: [
-                    CircleAvatar(
-                      backgroundColor: Colors.yellow,
-                    ),
-                    SizedBox(width: 16),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(''),
-                        Text(''),
-                      ],
-                    ),
-                    Spacer(),
-                    Text(''),
-                  ],
+                child: Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Row(
+                    children: [
+                      CircleAvatar(
+                        backgroundColor: Colors.yellow,
+                      ),
+                      SizedBox(width: 16),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text('Name'),
+                          Text('lastChats'),
+                        ],
+                      ),
+                      Spacer(),
+                      Text('time'),
+                    ],
+                  ),
                 ),
               ),
               Divider(),
               Card(
-                child: Row(
-                  children: [
-                    CircleAvatar(
-                      backgroundColor: Colors.yellow,
-                    ),
-                    SizedBox(width: 16),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(''),
-                        Text(''),
-                      ],
-                    ),
-                    Spacer(),
-                    Text(''),
-                  ],
+                child: Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Row(
+                    children: [
+                      CircleAvatar(
+                        backgroundColor: Colors.yellow,
+                      ),
+                      SizedBox(width: 16),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text('Name'),
+                          Text('lastChats'),
+                        ],
+                      ),
+                      Spacer(),
+                      Text('time'),
+                    ],
+                  ),
                 ),
               ),
               Divider(),
               Card(
-                child: Row(
-                  children: [
-                    CircleAvatar(
-                      backgroundColor: Colors.yellow,
-                    ),
-                    SizedBox(width: 16),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(''),
-                        Text(''),
-                      ],
-                    ),
-                    Spacer(),
-                    Text(''),
-                  ],
+                child: Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Row(
+                    children: [
+                      CircleAvatar(
+                        backgroundColor: Colors.yellow,
+                      ),
+                      SizedBox(width: 16),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text('Name'),
+                          Text('lastChats'),
+                        ],
+                      ),
+                      Spacer(),
+                      Text('time'),
+                    ],
+                  ),
                 ),
               ),
               Divider(),
               Card(
-                child: Row(
-                  children: [
-                    CircleAvatar(
-                      backgroundColor: Colors.yellow,
-                    ),
-                    SizedBox(width: 16),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(''),
-                        Text(''),
-                      ],
-                    ),
-                    Spacer(),
-                    Text(''),
-                  ],
+                child: Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Row(
+                    children: [
+                      CircleAvatar(
+                        backgroundColor: Colors.yellow,
+                      ),
+                      SizedBox(width: 16),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text('Name'),
+                          Text('lastChats'),
+                        ],
+                      ),
+                      Spacer(),
+                      Text('time'),
+                    ],
+                  ),
                 ),
               ),
               Divider(),
               Card(
-                child: Row(
-                  children: [
-                    CircleAvatar(
-                      backgroundColor: Colors.yellow,
-                    ),
-                    SizedBox(width: 16),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(''),
-                        Text(''),
-                      ],
-                    ),
-                    Spacer(),
-                    Text(''),
-                  ],
+                child: Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Row(
+                    children: [
+                      CircleAvatar(
+                        backgroundColor: Colors.yellow,
+                      ),
+                      SizedBox(width: 16),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text('Name'),
+                          Text('lastChats'),
+                        ],
+                      ),
+                      Spacer(),
+                      Text('time'),
+                    ],
+                  ),
                 ),
               ),
               Divider(),
               Card(
-                child: Row(
-                  children: [
-                    CircleAvatar(
-                      backgroundColor: Colors.yellow,
-                    ),
-                    SizedBox(width: 16),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(''),
-                        Text(''),
-                      ],
-                    ),
-                    Spacer(),
-                    Text(''),
-                  ],
+                child: Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Row(
+                    children: [
+                      CircleAvatar(
+                        backgroundColor: Colors.yellow,
+                      ),
+                      SizedBox(width: 16),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text('Name'),
+                          Text('lastChats'),
+                        ],
+                      ),
+                      Spacer(),
+                      Text('time'),
+                    ],
+                  ),
                 ),
               )
             ],

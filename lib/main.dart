@@ -6,11 +6,14 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 import 'home.dart';
 
 Future<void> main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  await Supabase.initialize(
-    url: dotenv.env['SUPERBASE_URL']!,
-    anonKey: dotenv.env['SUPERBASE_KEY']!,
-  );
+  // WidgetsFlutterBinding.ensureInitialized();
+  // await dotenv.load(fileName: ".env");
+  // print(dotenv.env['SUPERBASE_URL']);
+  // print(dotenv.env['SUPERBASE_KEY']);
+  // await Supabase.initialize(
+  //   url: dotenv.env['SUPERBASE_URL']!,
+  //   anonKey: dotenv.env['SUPERBASE_KEY']!,
+  // );
   runApp(const MyApp());
 }
 
