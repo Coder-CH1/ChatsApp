@@ -12,6 +12,7 @@ class UserRegistration extends StatefulWidget {
 }
 
 class _UserRegistrationState extends State<UserRegistration> {
+  bool _obscureText = true;
   String initialCountry = '';
   PhoneNumber number = PhoneNumber(isoCode: 'NG');
   final GlobalKey<FormState> _form = GlobalKey<FormState>();
@@ -119,9 +120,15 @@ class _UserRegistrationState extends State<UserRegistration> {
                               color: Colors.grey,
                             ),
                           errorStyle: TextStyle(color: Colors.red),
-                            suffixIcon: Icon(
-                              Icons.visibility,
-                              color: Colors.orangeAccent,
+                            suffixIcon: IconButton(
+                                icon: Icon(
+                                  _obscureText ? Icons.visibility : Icons.visibility_off, color: Colors.orange,
+                                ),
+                              onPressed: () {
+                                  setState(() {
+                                    _obscureText = !_obscureText;
+                                  });
+                              },
                             )
                         ),
                           validator: (val) {
@@ -147,9 +154,15 @@ class _UserRegistrationState extends State<UserRegistration> {
                               color: Colors.grey,
                             ),
                           errorStyle: TextStyle(color: Colors.red),
-                            suffixIcon: Icon(
-                              Icons.visibility,
-                              color: Colors.orangeAccent,
+                            suffixIcon: IconButton(
+                              icon: Icon(
+                                _obscureText ? Icons.visibility : Icons.visibility_off, color: Colors.orange,
+                              ),
+                              onPressed: () {
+                                setState(() {
+                                  _obscureText = !_obscureText;
+                                });
+                              },
                             )
                         ),
                           validator: (val){
