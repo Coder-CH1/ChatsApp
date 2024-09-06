@@ -4,17 +4,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
-const supabaseUrl = 'https://hddeawdthbylnaqvqpuv.supabase.co';
-const supabaseKey = String.fromEnvironment('SUPABASE_KEY');
-
 Future<void> main() async {
-    await Supabase.initialize(url: supabaseUrl, anonKey: supabaseKey);
-  //WidgetsFlutterBinding.ensureInitialized();
-
-  // await Supabase.initialize(
-  //   url: 'YOUR_SUPABASE_URL',
-  //   anonKey: 'YOUR_SUPABASE_ANON_KEY',
-  // );
+  WidgetsFlutterBinding.ensureInitialized();
+  await dotenv.load(fileName: '.env');
+  await Supabase.initialize(
+    url: 'SUPABASE_URL',
+    anonKey: 'SUPABASE_KEY',
+  );
   runApp(MyApp());
 }
 
