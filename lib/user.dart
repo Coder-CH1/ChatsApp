@@ -12,7 +12,8 @@ class UserRegistration extends StatefulWidget {
 }
 
 class _UserRegistrationState extends State<UserRegistration> {
-  bool _obscureText = true;
+  bool _obscureTextPassword = true;
+  bool _obscureTextConfirmPassword = true;
   String initialCountry = '';
   PhoneNumber number = PhoneNumber(isoCode: 'NG');
   final GlobalKey<FormState> _form = GlobalKey<FormState>();
@@ -109,7 +110,7 @@ class _UserRegistrationState extends State<UserRegistration> {
                       TextFormField(
                         controller: passwordController,
                         keyboardType: TextInputType.visiblePassword,
-                        obscureText: _obscureText,
+                        obscureText: _obscureTextPassword,
                         decoration: InputDecoration(
                           border: UnderlineInputBorder(
                             borderSide: BorderSide(color: Colors.black)
@@ -122,11 +123,11 @@ class _UserRegistrationState extends State<UserRegistration> {
                           errorStyle: TextStyle(color: Colors.red),
                             suffixIcon: IconButton(
                                 icon: Icon(
-                                  _obscureText ? Icons.visibility : Icons.visibility_off, color: Colors.orange,
+                                  _obscureTextPassword ? Icons.visibility : Icons.visibility_off, color: Colors.orange,
                                 ),
                               onPressed: () {
                                   setState(() {
-                                    _obscureText = !_obscureText;
+                                    _obscureTextPassword = !_obscureTextPassword;
                                   });
                               },
                             )
@@ -143,7 +144,7 @@ class _UserRegistrationState extends State<UserRegistration> {
                       TextFormField(
                         controller: confirmPasswordController,
                         keyboardType: TextInputType.visiblePassword,
-                        obscureText: _obscureText,
+                        obscureText: _obscureTextConfirmPassword,
                         decoration: InputDecoration(
                             border: UnderlineInputBorder(
                                 borderSide: BorderSide(color: Colors.black)
@@ -156,11 +157,11 @@ class _UserRegistrationState extends State<UserRegistration> {
                           errorStyle: TextStyle(color: Colors.red),
                             suffixIcon: IconButton(
                               icon: Icon(
-                                _obscureText ? Icons.visibility : Icons.visibility_off, color: Colors.orange,
+                                _obscureTextConfirmPassword ? Icons.visibility : Icons.visibility_off, color: Colors.orange,
                               ),
                               onPressed: () {
                                 setState(() {
-                                  _obscureText = !_obscureText;
+                                  _obscureTextConfirmPassword = !_obscureTextConfirmPassword;
                                 });
                               },
                             )
