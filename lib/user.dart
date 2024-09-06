@@ -12,7 +12,7 @@ class UserRegistration extends StatefulWidget {
 
 class _UserRegistrationState extends State<UserRegistration> {
   String initialCountry = '';
-  PhoneNumber number = PhoneNumber(isoCode: '');
+  PhoneNumber number = PhoneNumber(isoCode: 'NG');
   final GlobalKey<FormState> _form = GlobalKey<FormState>();
   final TextEditingController phoneNumber = TextEditingController();
   final TextEditingController password = TextEditingController();
@@ -79,17 +79,24 @@ class _UserRegistrationState extends State<UserRegistration> {
                         fontWeight: FontWeight.w600,
                       ),
                       ),
-                      TextFormField(
-                        controller: phoneNumber,
+                      InternationalPhoneNumberInput(
+                        onInputChanged: (PhoneNumber number) {
+                          this.number = number;
+                        },
+                        selectorConfig: SelectorConfig(
+                          selectorType: PhoneInputSelectorType.DIALOG,
+                        ),
+                        initialValue: number,
+                        textFieldController: phoneNumber,
                         keyboardType: TextInputType.phone,
-                        decoration: const InputDecoration(
+                        formatInput: false,
+                        inputDecoration: const InputDecoration(
                             hintText: 'phone number',
                           hintStyle: TextStyle(
                           color: Colors.grey,
                         ),
                           errorStyle: TextStyle(color: Colors.red),
                         ),
-                        autofocus: false,
                         validator: (val) {
                           if (val == null || val.isEmpty) {
                            return 'Phone number cannot be empty';
