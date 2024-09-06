@@ -109,7 +109,7 @@ class _UserRegistrationState extends State<UserRegistration> {
                       TextFormField(
                         controller: passwordController,
                         keyboardType: TextInputType.visiblePassword,
-                        obscureText: true,
+                        obscureText: _obscureText,
                         decoration: InputDecoration(
                           border: UnderlineInputBorder(
                             borderSide: BorderSide(color: Colors.black)
@@ -143,7 +143,7 @@ class _UserRegistrationState extends State<UserRegistration> {
                       TextFormField(
                         controller: confirmPasswordController,
                         keyboardType: TextInputType.visiblePassword,
-                        obscureText: true,
+                        obscureText: _obscureText,
                         decoration: InputDecoration(
                             border: UnderlineInputBorder(
                                 borderSide: BorderSide(color: Colors.black)
