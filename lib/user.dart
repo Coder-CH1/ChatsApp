@@ -1,6 +1,7 @@
 import 'package:chatsapp/resusable_widgets/custom_color.dart';
 import 'package:flutter/material.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 import 'home.dart';
 
 class UserRegistration extends StatefulWidget {
@@ -14,9 +15,9 @@ class _UserRegistrationState extends State<UserRegistration> {
   String initialCountry = '';
   PhoneNumber number = PhoneNumber(isoCode: 'NG');
   final GlobalKey<FormState> _form = GlobalKey<FormState>();
-  final TextEditingController phoneNumber = TextEditingController();
-  final TextEditingController password = TextEditingController();
-  final TextEditingController confirmPassword = TextEditingController();
+  final TextEditingController phoneNumberController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+  final TextEditingController confirmPasswordController = TextEditingController();
 
   moveToChatPage(BuildContext context) {
     if (_form.currentState!.validate()) {
@@ -87,7 +88,7 @@ class _UserRegistrationState extends State<UserRegistration> {
                           selectorType: PhoneInputSelectorType.DIALOG,
                         ),
                         initialValue: number,
-                        textFieldController: phoneNumber,
+                        textFieldController: phoneNumberController,
                         keyboardType: TextInputType.phone,
                         formatInput: false,
                         inputDecoration: const InputDecoration(
@@ -105,7 +106,7 @@ class _UserRegistrationState extends State<UserRegistration> {
                         },
                       ),
                       TextFormField(
-                        controller: password,
+                        controller: passwordController,
                         keyboardType: TextInputType.visiblePassword,
                         obscureText: true,
                         decoration: InputDecoration(
@@ -133,7 +134,7 @@ class _UserRegistrationState extends State<UserRegistration> {
                           }
                       ),
                       TextFormField(
-                        controller: confirmPassword,
+                        controller: confirmPasswordController,
                         keyboardType: TextInputType.visiblePassword,
                         obscureText: true,
                         decoration: InputDecoration(
@@ -154,7 +155,7 @@ class _UserRegistrationState extends State<UserRegistration> {
                           validator: (val){
                             if(val == null || val.isEmpty) {
                               return 'Password cannot be empty';
-                            } else if(val != password.text) {
+                            } else if(val != passwordController.text) {
                               return 'Password does not Match';
                             }
                             return null;
@@ -175,6 +176,7 @@ class _UserRegistrationState extends State<UserRegistration> {
                 ),
                   onPressed: (){
                    moveToChatPage(context);
+                    //_signInWithPhoneNumber();
                   },
                   child: Text('Sign in', style: TextStyle(
                     color: Colors.black54,
