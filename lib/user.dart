@@ -17,13 +17,23 @@ class _UserRegistrationState extends State<UserRegistration> {
   final GlobalKey<FormState> _form = GlobalKey<FormState>();
   final TextEditingController phoneNumberController = TextEditingController();
 
-  moveToChatPage(BuildContext context) {
-    if (_form.currentState!.validate()) {
-      setState(() {
-        Navigator.push(context,
-        MaterialPageRoute(builder: (context) => const VerifyUser()),
-        );
-      });
+  Future<void> _verifyUserWithPhoneNumber() async {
+    final phoneNumber = number.phoneNumber;
+    print('$phoneNumber');
+    if(!_form.currentState!.validate()) return;
+
+    try {
+      final response = await Supabase.instance.client.auth.signInWithOtp(
+        phone: phoneNumber,
+      );
+      Navigator.push(
+          context,
+      MaterialPageRoute(builder: (context) => VerifyUser()),
+      );
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Error: ${e.toString()}'),)
+      );
     }
   }
 
@@ -120,8 +130,7 @@ class _UserRegistrationState extends State<UserRegistration> {
                   backgroundColor: Color(0xFFFFE81D)
                 ),
                   onPressed: (){
-                   moveToChatPage(context);
-                   // _signInWithPhoneNumber();
+                    _verifyUserWithPhoneNumber();
                   },
                   child: Text('Verify user', style: TextStyle(
                     color: Colors.black54,

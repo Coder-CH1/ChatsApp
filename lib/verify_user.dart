@@ -158,7 +158,6 @@ class _VerifyUserState extends State<VerifyUser> {
                       ),
                       onPressed: (){
                         moveToChatPage(context);
-                        //_signInWithPhoneNumber();
                       },
                       child: Text('Sign in', style: TextStyle(
                         color: Colors.black54,
