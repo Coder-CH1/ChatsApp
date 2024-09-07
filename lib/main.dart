@@ -4,23 +4,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
-Future<void> main() async {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  final supabaseUrl = dotenv.env['SUPERBASE_URL'];
-  final supabaseKey = dotenv.env['SUPERBASE_KEY'];
-  final debugMode = dotenv.env['DEBUG'] == 'true';
-
-  if (supabaseUrl == null || supabaseKey == null) {
-    print('error, environment variables are not set properly');
-    return;
-  }
-
-  await dotenv.load(fileName: '.env');
-  await Supabase.initialize(
-    url: supabaseUrl,
-    anonKey: supabaseKey,
-  );
-  runApp(MyApp());
+// load env
+  await dotenv.load();
+// initialize supabase
+  String supabaseUrl = dotenv.env['SUPABASE_URL'] ?? '';
+  String supabaseKey = dotenv.env['SUPABASE_KEY'] ?? '';
+  await Supabase.initialize(url: supabaseUrl,anonKey: supabaseKey);
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
