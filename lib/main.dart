@@ -6,10 +6,19 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  final supabaseUrl = dotenv.env['SUPERBASE_URL'];
+  final supabaseKey = dotenv.env['SUPERBASE_KEY'];
+  final debugMode = dotenv.env['DEBUG'] == 'true';
+
+  if (supabaseUrl == null || supabaseKey == null) {
+    print('error, environment variables are not set properly');
+    return;
+  }
+
   await dotenv.load(fileName: '.env');
   await Supabase.initialize(
-    url: 'SUPABASE_URL',
-    anonKey: 'SUPABASE_KEY',
+    url: supabaseUrl,
+    anonKey: supabaseKey,
   );
   runApp(MyApp());
 }

@@ -10,4 +10,11 @@ class CustomColor {
   begin: Alignment.topCenter,
     end: Alignment.bottomCenter,
   );
+  static LinearGradient get multiColors2 => LinearGradient(colors: [
+    Color(0xFF00F0FF),
+    Color(0xFFFFE81D),
+  ],
+    begin: Alignment.topCenter,
+    end: Alignment.bottomCenter,
+  );
 }

@@ -1,9 +1,8 @@
 import 'package:chatsapp/resusable_widgets/custom_color.dart';
+import 'package:chatsapp/verify_user.dart';
 import 'package:flutter/material.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
-import 'package:pin_code_fields/pin_code_fields.dart';
-import 'home.dart';
 
 class UserRegistration extends StatefulWidget {
   const UserRegistration({super.key});
@@ -17,13 +16,12 @@ class _UserRegistrationState extends State<UserRegistration> {
   PhoneNumber number = PhoneNumber(isoCode: 'NG');
   final GlobalKey<FormState> _form = GlobalKey<FormState>();
   final TextEditingController phoneNumberController = TextEditingController();
-  final TextEditingController pinCodeController = TextEditingController();
 
   moveToChatPage(BuildContext context) {
     if (_form.currentState!.validate()) {
       setState(() {
         Navigator.push(context,
-        MaterialPageRoute(builder: (context) => const Home()),
+        MaterialPageRoute(builder: (context) => const VerifyUser()),
         );
       });
     }
@@ -108,32 +106,6 @@ class _UserRegistrationState extends State<UserRegistration> {
                       SizedBox(
                         height: 30,
                       ),
-                      PinCodeTextField(
-                        controller: pinCodeController,
-                        pinTheme: PinTheme(
-                          shape: PinCodeFieldShape.box,
-                          borderRadius: BorderRadius.circular(4),
-                          fieldHeight: 52,
-                          fieldWidth: 51,
-                          activeFillColor: Colors.transparent,
-                          activeColor: Colors.grey,
-                          inactiveColor: Colors.grey,
-                          errorBorderColor: Colors.red,
-                          borderWidth: 0.2,
-                        ),
-                        backgroundColor: Colors.transparent,
-                        appContext: context,
-                        length: 6,
-                        autoFocus: true,
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        cursorColor: Colors.grey, onChanged: (String value) {  },
-                        validator: (val) {
-                          if (val == null || val.isEmpty) {
-                            return 'Field cannot be empty';
-                          }
-                          return null;
-                        },
-                      ),
                     ],
                   ),
               ),
@@ -149,9 +121,9 @@ class _UserRegistrationState extends State<UserRegistration> {
                 ),
                   onPressed: (){
                    moveToChatPage(context);
-                    //_signInWithPhoneNumber();
+                   // _signInWithPhoneNumber();
                   },
-                  child: Text('Sign in', style: TextStyle(
+                  child: Text('Verify user', style: TextStyle(
                     color: Colors.black54,
                     fontWeight: FontWeight.w500,
                     fontSize: 12,
