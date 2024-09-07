@@ -2,6 +2,7 @@ import 'package:chatsapp/resusable_widgets/custom_color.dart';
 import 'package:flutter/material.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:pin_code_fields/pin_code_fields.dart';
 import 'home.dart';
 
 class UserRegistration extends StatefulWidget {
@@ -12,14 +13,11 @@ class UserRegistration extends StatefulWidget {
 }
 
 class _UserRegistrationState extends State<UserRegistration> {
-  bool _obscureTextPassword = true;
-  bool _obscureTextConfirmPassword = true;
   String initialCountry = '';
   PhoneNumber number = PhoneNumber(isoCode: 'NG');
   final GlobalKey<FormState> _form = GlobalKey<FormState>();
   final TextEditingController phoneNumberController = TextEditingController();
-  final TextEditingController passwordController = TextEditingController();
-  final TextEditingController confirmPasswordController = TextEditingController();
+  final TextEditingController pinCodeController = TextEditingController();
 
   moveToChatPage(BuildContext context) {
     if (_form.currentState!.validate()) {
@@ -52,7 +50,7 @@ class _UserRegistrationState extends State<UserRegistration> {
           child: Column(
             children: [
               Padding(
-                padding: EdgeInsets.only(top: 60, left: 20, right: 20),
+                padding: EdgeInsets.only(top: 80, left: 20, right: 20),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -107,73 +105,34 @@ class _UserRegistrationState extends State<UserRegistration> {
                           return null;
                         },
                       ),
-                      TextFormField(
-                        controller: passwordController,
-                        keyboardType: TextInputType.visiblePassword,
-                        obscureText: _obscureTextPassword,
-                        decoration: InputDecoration(
-                          border: UnderlineInputBorder(
-                            borderSide: BorderSide(color: Colors.black)
-                          ),
-                          //labelText: 'Password',
-                          hintText: 'Enter your password',
-                            hintStyle: TextStyle(
-                              color: Colors.grey,
-                            ),
-                          errorStyle: TextStyle(color: Colors.red),
-                            suffixIcon: IconButton(
-                                icon: Icon(
-                                  _obscureTextPassword ? Icons.visibility : Icons.visibility_off, color: Colors.orange,
-                                ),
-                              onPressed: () {
-                                  setState(() {
-                                    _obscureTextPassword = !_obscureTextPassword;
-                                  });
-                              },
-                            )
-                        ),
-                          validator: (val) {
-                            if(val == null || val.isEmpty) {
-                              return 'Password cannot be empty';
-                            } else if(val.length<6) {
-                              return 'Password length must be at least 6';
-                            }
-                            return null;
-                          }
+                      SizedBox(
+                        height: 30,
                       ),
-                      TextFormField(
-                        controller: confirmPasswordController,
-                        keyboardType: TextInputType.visiblePassword,
-                        obscureText: _obscureTextConfirmPassword,
-                        decoration: InputDecoration(
-                            border: UnderlineInputBorder(
-                                borderSide: BorderSide(color: Colors.black)
-                            ),
-                            //labelText: 'Confirm Password',
-                            hintText: 'Enter your password',
-                            hintStyle: TextStyle(
-                              color: Colors.grey,
-                            ),
-                          errorStyle: TextStyle(color: Colors.red),
-                            suffixIcon: IconButton(
-                              icon: Icon(
-                                _obscureTextConfirmPassword ? Icons.visibility : Icons.visibility_off, color: Colors.orange,
-                              ),
-                              onPressed: () {
-                                setState(() {
-                                  _obscureTextConfirmPassword = !_obscureTextConfirmPassword;
-                                });
-                              },
-                            )
+                      PinCodeTextField(
+                        controller: pinCodeController,
+                        pinTheme: PinTheme(
+                          shape: PinCodeFieldShape.box,
+                          borderRadius: BorderRadius.circular(4),
+                          fieldHeight: 52,
+                          fieldWidth: 51,
+                          activeFillColor: Colors.transparent,
+                          activeColor: Colors.grey,
+                          inactiveColor: Colors.grey,
+                          errorBorderColor: Colors.red,
+                          borderWidth: 0.2,
                         ),
-                          validator: (val){
-                            if(val == null || val.isEmpty) {
-                              return 'Password cannot be empty';
-                            } else if(val != passwordController.text) {
-                              return 'Password does not Match';
-                            }
-                            return null;
+                        backgroundColor: Colors.transparent,
+                        appContext: context,
+                        length: 6,
+                        autoFocus: true,
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        cursorColor: Colors.grey, onChanged: (String value) {  },
+                        validator: (val) {
+                          if (val == null || val.isEmpty) {
+                            return 'Field cannot be empty';
                           }
+                          return null;
+                        },
                       ),
                     ],
                   ),
