@@ -38,43 +38,6 @@ class _UserRegistrationState extends State<UserRegistration> {
     }
   }
 
-  Future<void> _signInAndCreateProfile() async{
-    if (!_form.currentState!.validate()) return;
-    try {
-      final response = await Supabase.instance.client.auth.verifyOTP(
-          phone:  widget.phoneNumber,
-          token:  pinCodeController.text,
-          type: OtpType.sms);
-      final Session? session = response.session;
-      final User? user = response.user;
-      //final user = Supabase.instance.client.auth.currentUser;
-
-      if (user != null) {
-        final profileResponse = await Supabase.instance.client
-            .from('profiles')
-            .upsert({
-          'id': user?.id,
-          'phone_number': widget.phoneNumber,
-          'display_name': 'User'
-        });
-
-        if (profileResponse.error != null) {
-          throw profileResponse.error!;
-        }
-
-        Navigator.push(context,
-          MaterialPageRoute(builder: (context) => Home()),
-        );
-      } else {
-        throw Exception('user authentication failed');
-      }
-    } catch (e) {
-      ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Error: ${e.toString()}'),)
-      );
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -200,7 +163,7 @@ class _UserRegistrationState extends State<UserRegistration> {
                         backgroundColor: Color(0xFFFFE81D)
                     ),
                     onPressed: (){
-                      _signInAndCreateProfile();
+                      //_signInAndCreateProfile();
                     },
                     child: Text('Sign in', style: TextStyle(
                       color: Colors.black54,
