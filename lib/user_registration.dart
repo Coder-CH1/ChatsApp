@@ -1,11 +1,14 @@
 import 'package:chatsapp/resusable_widgets/custom_color.dart';
-import 'package:chatsapp/verify_user.dart';
 import 'package:flutter/material.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
+import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:supabase/supabase.dart';
+import 'home.dart';
 
 class UserRegistration extends StatefulWidget {
-  const UserRegistration({super.key});
+  final String phoneNumber;
+  const UserRegistration({super.key, required this.phoneNumber});
 
   @override
   State<UserRegistration> createState() => _UserRegistrationState();
@@ -16,8 +19,9 @@ class _UserRegistrationState extends State<UserRegistration> {
   PhoneNumber number = PhoneNumber(isoCode: 'NG');
   final GlobalKey<FormState> _form = GlobalKey<FormState>();
   final TextEditingController phoneNumberController = TextEditingController();
+  final TextEditingController pinCodeController = TextEditingController();
 
-  Future<void> _verifyUserWithPhoneNumber() async {
+  Future<void> _sendOtp() async {
     final phoneNumber = number.phoneNumber;
     print('$phoneNumber');
     if(!_form.currentState!.validate()) return;
@@ -26,13 +30,47 @@ class _UserRegistrationState extends State<UserRegistration> {
       final response = await Supabase.instance.client.auth.signInWithOtp(
         phone: phoneNumber,
       );
-      Navigator.push(
-          context,
-      MaterialPageRoute(builder: (context) => VerifyUser()),
-      );
+
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('Error: ${e.toString()}'),)
+      );
+    }
+  }
+
+  Future<void> _signInAndCreateProfile() async{
+    if (!_form.currentState!.validate()) return;
+    try {
+      final response = await Supabase.instance.client.auth.verifyOTP(
+          phone:  widget.phoneNumber,
+          token:  pinCodeController.text,
+          type: OtpType.sms);
+      final Session? session = response.session;
+      final User? user = response.user;
+      //final user = Supabase.instance.client.auth.currentUser;
+
+      if (user != null) {
+        final profileResponse = await Supabase.instance.client
+            .from('profiles')
+            .upsert({
+          'id': user?.id,
+          'phone_number': widget.phoneNumber,
+          'display_name': 'User'
+        });
+
+        if (profileResponse.error != null) {
+          throw profileResponse.error!;
+        }
+
+        Navigator.push(context,
+          MaterialPageRoute(builder: (context) => Home()),
+        );
+      } else {
+        throw Exception('user authentication failed');
+      }
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Error: ${e.toString()}'),)
       );
     }
   }
@@ -58,7 +96,7 @@ class _UserRegistrationState extends State<UserRegistration> {
           child: Column(
             children: [
               Padding(
-                padding: EdgeInsets.only(top: 80, left: 20, right: 20),
+                padding: EdgeInsets.only(top: 60, left: 20, right: 20),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -119,25 +157,57 @@ class _UserRegistrationState extends State<UserRegistration> {
                     ],
                   ),
               ),
-            SizedBox(
-             height: 20,
-            ),
-            SizedBox(
-              height: 48,
-              width: 327,
-              child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Color(0xFFFFE81D)
+            TextButton(
+                onPressed: (){
+                  _sendOtp();
+                },
+                child: Text('Send otp', style: TextStyle(
+                  color: Colors.black54,
+                  fontWeight: FontWeight.w500,
+                  fontSize: 12,
+                ))),
+              PinCodeTextField(
+                controller: pinCodeController,
+                pinTheme: PinTheme(
+                  shape: PinCodeFieldShape.box,
+                  borderRadius: BorderRadius.circular(4),
+                  fieldHeight: 52,
+                  fieldWidth: 51,
+                  activeFillColor: Colors.transparent,
+                  activeColor: Colors.grey,
+                  inactiveColor: Colors.grey,
+                  errorBorderColor: Colors.red,
+                  borderWidth: 0.2,
                 ),
-                  onPressed: (){
-                    _verifyUserWithPhoneNumber();
-                  },
-                  child: Text('Verify user', style: TextStyle(
-                    color: Colors.black54,
-                    fontWeight: FontWeight.w500,
-                    fontSize: 12,
-                  ))),
-            )
+                backgroundColor: Colors.transparent,
+                appContext: context,
+                length: 6,
+                autoFocus: true,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                cursorColor: Colors.grey, onChanged: (String value) {  },
+                validator: (val) {
+                  if (val == null || val.isEmpty) {
+                    return 'Field cannot be empty';
+                  }
+                  return null;
+                },
+              ),
+              SizedBox(
+                height: 48,
+                width: 327,
+                child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                        backgroundColor: Color(0xFFFFE81D)
+                    ),
+                    onPressed: (){
+                      _signInAndCreateProfile();
+                    },
+                    child: Text('Sign in', style: TextStyle(
+                      color: Colors.black54,
+                      fontWeight: FontWeight.w500,
+                      fontSize: 12,
+                    ))),
+              )
             ],
           ),
         ),
