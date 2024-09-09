@@ -2,8 +2,6 @@
 
 - A real-time chat application built with Flutter, powered by Supabase and Websockets.
 
-Here's a refined version of your GitHub repository description:
-
 *ChatsApp*
 
 A real-time chat application built with Flutter, powered by Supabase and WebSockets.
