@@ -43,19 +43,22 @@ class _UserRegistrationState extends State<UserRegistration> {
   Future<void> _verifyUserAndSignIn() async {
     if (!_secondForm.currentState!.validate()) return;
     try {
+      //print('phone number: ${widget.phoneNumber}');
       final response = await Supabase.instance.client.auth.verifyOTP(
-          phone:  widget.phoneNumber,
+          phone:  number.phoneNumber,
           token:  pinCodeController.text,
           type: OtpType.sms);
-
+      final session = response.session;
+      if(session != null) {
+        await Supabase.instance.client.auth.setSession(session.accessToken);
+      }
       final user = Supabase.instance.client.auth.currentUser;
-
       if (user != null) {
         final profileResponse = await Supabase.instance.client
             .from('profiles')
             .upsert({
           'id': user?.id,
-          'phone_number': widget.phoneNumber,
+          'phone_number': number.phoneNumber,
           'display_name': 'User'
         });
 
@@ -210,7 +213,7 @@ class _UserRegistrationState extends State<UserRegistration> {
                             backgroundColor: Color(0xFFFFE81D)
                         ),
                         onPressed: (){
-                          //_verifyUserAndSignIn();
+                          _verifyUserAndSignIn();
                         },
                         child: Text('Sign in', style: TextStyle(
                           color: Colors.black54,
