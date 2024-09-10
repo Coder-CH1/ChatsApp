@@ -50,7 +50,7 @@ class _UserRegistrationState extends State<UserRegistration> {
           type: OtpType.sms);
       final session = response.session;
       if(session != null) {
-        await Supabase.instance.client.auth.setSession(session.accessToken);
+        await Supabase.instance.client.auth.setSession('session');
       }
       final user = Supabase.instance.client.auth.currentUser;
       if (user != null) {
@@ -213,7 +213,7 @@ class _UserRegistrationState extends State<UserRegistration> {
                             backgroundColor: Color(0xFFFFE81D)
                         ),
                         onPressed: (){
-                          _verifyUserAndSignIn();
+                          //_verifyUserAndSignIn();
                         },
                         child: Text('Sign in', style: TextStyle(
                           color: Colors.black54,
