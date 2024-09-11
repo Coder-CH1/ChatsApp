@@ -1,4 +1,3 @@
-import 'package:chatsapp/model/profile_user.dart';
 import 'package:chatsapp/resusable_widgets/custom_color.dart';
 import 'package:flutter/material.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
@@ -43,41 +42,45 @@ class _UserRegistrationState extends State<UserRegistration> {
   Future<void> _verifyUserAndSignIn() async {
     if (!_secondForm.currentState!.validate()) return;
     try {
-      //print('phone number: ${widget.phoneNumber}');
       final response = await Supabase.instance.client.auth.verifyOTP(
           phone:  number.phoneNumber,
           token:  pinCodeController.text,
           type: OtpType.sms);
-      final session = response.session;
-      if(session != null) {
-        await Supabase.instance.client.auth.setSession('session');
-      }
-      final user = Supabase.instance.client.auth.currentUser;
-      if (user != null) {
-        final profileResponse = await Supabase.instance.client
-            .from('profiles')
-            .upsert({
-          'id': user?.id,
-          'phone_number': number.phoneNumber,
-          'display_name': 'User'
-        });
 
-        if (profileResponse.error != null) {
-          throw profileResponse.error!;
+        if (response.session != null) {
+        final user = Supabase.instance.client.auth.currentUser;
+        if (user != null) {
+          final profileResponse = await Supabase.instance.client
+              .from('profiles')
+              .upsert({
+            'id': user?.id,
+            'phone_number': number.phoneNumber,
+            'display_name': 'User'
+          });
+          if (profileResponse != null) {
+            throw profileResponse.error;
+          }
+          try {
+            Navigator.pushReplacement(context,
+              MaterialPageRoute(builder: (context) => Home()),
+            );
+          } catch (e) {
+            print('Error: $e');
+          }
+        } else {
+          throw Exception('user authentication failed');
         }
-
-        Navigator.push(context,
-          MaterialPageRoute(builder: (context) => Home()),
-        );
       } else {
-        throw Exception('user authentication failed');
-      }
-    } catch (e) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text('invalid otp')),
+          );
+        }
+      } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text('Error: ${e.toString()}'),)
       );
+      }
     }
-  }
 
   @override
   Widget build(BuildContext context) {
