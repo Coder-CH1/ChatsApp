@@ -216,7 +216,7 @@ class _UserRegistrationState extends State<UserRegistration> {
                             backgroundColor: Color(0xFFFFE81D)
                         ),
                         onPressed: (){
-                          //_verifyUserAndSignIn();
+                          _verifyUserAndSignIn();
                         },
                         child: Text('Sign in', style: TextStyle(
                           color: Colors.black54,
