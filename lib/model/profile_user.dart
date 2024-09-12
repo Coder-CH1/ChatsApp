@@ -19,7 +19,7 @@ class ProfileUser {
   factory ProfileUser.fromJson(Map<String, dynamic> json) {
     return ProfileUser(
       id: json['id'] as int,
-      createdAt: DateTime.parse(json['created_at'] as String),
+      createdAt: DateTime.parse(json['createdAt'] as String),
       phoneNumber: json['phoneNumber'],
       displayName: json['displayName'],
     );
@@ -42,11 +42,7 @@ Future<ProfileUser?> fetchProfileUser() async {
   .select()
   .eq('id', userId)
   .single();
-  //.execute();
 
-  // if (response.error != null) {
-  //   throw response.error!;
-  // }
   final data = response.data;
 if (data == null) {
   return null;

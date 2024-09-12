@@ -54,8 +54,9 @@ class _UserRegistrationState extends State<UserRegistration> {
               .from('profiles')
               .upsert({
             'id': user?.id,
-            'phone_number': number.phoneNumber,
-            'display_name': 'User'
+            'createdAt': user.createdAt,
+            'phoneNumber': number.phoneNumber,
+            'displayName': 'User'
           });
           if (profileResponse != null) {
             throw profileResponse.error;
