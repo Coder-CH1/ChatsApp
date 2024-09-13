@@ -50,17 +50,13 @@ class _UserRegistrationState extends State<UserRegistration> {
         if (response.session != null) {
         final user = Supabase.instance.client.auth.currentUser;
         if (user != null) {
-          final intUserId = int.tryParse(user.id ?? '');
-          if (intUserId != null) {
-            throw Exception('invalid user id');
-          }
           final profileResponse = await Supabase.instance.client
               .from('profiles')
               .upsert({
-            'id': intUserId,
-            'createdAt': user.createdAt,
-            'phoneNumber': number.phoneNumber,
-            'displayName': 'User'
+            'user_id': user.id,
+            'created_at': user.createdAt,
+            'phone_number': number.phoneNumber,
+            'display_name': 'User'
           });
           if (profileResponse != null) {
             throw profileResponse.error;

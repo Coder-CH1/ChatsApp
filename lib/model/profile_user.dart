@@ -3,24 +3,24 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 class ProfileUser {
-  final int id;
-  final DateTime createdAt;
-  final String phoneNumber;
-  final String displayName;
+  final String user_id;
+  final DateTime created_at;
+  final String phone_number;
+  final String display_name;
 
   ProfileUser({
-    required this.id,
-    required this.createdAt,
-    required this.phoneNumber,
-    required this.displayName,
+    required this.user_id,
+    required this.created_at,
+    required this.phone_number,
+    required this.display_name,
 });
 
   factory ProfileUser.fromJson(Map<String, dynamic> json) {
     return ProfileUser(
-      id: json['id'] as int,
-      createdAt: DateTime.parse(json['createdAt'] as String),
-      phoneNumber: json['phoneNumber'],
-      displayName: json['displayName'],
+      user_id: json['userId'],
+      created_at: DateTime.parse(json['createdAt'] as String),
+      phone_number: json['phoneNumber'],
+      display_name: json['displayName'],
     );
   }
 }

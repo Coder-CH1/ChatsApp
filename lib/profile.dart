@@ -48,12 +48,12 @@ class _ProfileState extends State<Profile> {
                   size: 30,
                 ),
                 SizedBox(height: 10),
-                Text('Name: ${profileUser?.displayName}', style: TextStyle(
+                Text('Name: ${profileUser?.display_name}', style: TextStyle(
                   color: Colors.grey,
                   fontSize: 18,
                 )),
                 SizedBox(height: 10),
-            Text('Name: ${profileUser?.phoneNumber}', style: TextStyle(
+            Text('Name: ${profileUser?.phone_number}', style: TextStyle(
               color: Colors.grey,
               fontSize: 18,
             )),
