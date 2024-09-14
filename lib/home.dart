@@ -24,15 +24,6 @@ class _HomeState extends State<Home> {
   }
   List<String> _messages = [];
   @override
-  void initState() {
-    super.initState();
-    socket = IO.io('YOUR_SOCKET_SERVER_URL', <String, dynamic>{
-      'transports': ['websocket'],
-    });
-    socket.connect();
-    socket.on('message', _handleMessage);
-  }
-  @override
   void dispose() {
     socket.disconnect();
     super.dispose();
