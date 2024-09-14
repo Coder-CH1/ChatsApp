@@ -1,50 +1,110 @@
+import 'package:chatsapp/profile.dart';
 import 'package:flutter/material.dart';
+import 'package:socket_io_client/socket_io_client.dart' as IO;
+import 'package:socket_io_client/socket_io_client.dart';
 
 
 class Home extends StatefulWidget {
   const Home({super.key});
 
   @override
-  State<Home> createState() => _HomeState();
+  _HomeState createState() => _HomeState();
 }
-
 class _HomeState extends State<Home> {
+  late IO.Socket socket;
   @override
+
+  void sendMessage(String message) {
+    socket.emit('message', message);
+  }
+  void _handleMessage(dynamic message) {
+    setState(() {
+      _messages.add(message);
+    });
+  }
+  List<String> _messages = [];
+  @override
+  void initState() {
+    super.initState();
+    socket = IO.io('YOUR_SOCKET_SERVER_URL', <String, dynamic>{
+      'transports': ['websocket'],
+    });
+    socket.connect();
+    socket.on('message', _handleMessage);
+  }
+  @override
+  void dispose() {
+    socket.disconnect();
+    super.dispose();
+  }
+
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Chats', style: TextStyle(
-          fontFamily: 'Caros',
-          color: Colors.black54,
-          fontWeight: FontWeight.bold,
-        ),),
+        backgroundColor: Color(0xFFFFE81D),
+        title: Text('Chat'),
+        leading: IconButton(
+          icon: Icon(Icons.person, color: Colors.black),
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => Profile()),
+            );
+          },
+        ),
       ),
-          body: ListView(
-            children: [
-              Card(
-                child: Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Row(
-                    children: [
-                      CircleAvatar(
-                        backgroundColor: Colors.yellow,
-                      ),
-                      SizedBox(width: 16),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text('Name'),
-                          Text('lastChats'),
-                        ],
-                      ),
-                      Spacer(),
-                      Text('time'),
-                    ],
+      body: Column(
+        children: <Widget>[
+          Expanded(
+            child: ListView.builder(
+              itemCount: _messages.length,
+              itemBuilder: (BuildContext context, int index) {
+                return ListTile(
+                  title: Text(_messages[index]),
+                );
+              },
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Row(
+              children: <Widget>[
+                Expanded(
+                  child: TextField(
+                    decoration: InputDecoration(
+                      hintText: 'Enter your message...',
+                    ),
                   ),
                 ),
-              ),
-            ],
+                IconButton(
+                  icon: Icon(Icons.send),
+                  color: Color(0xFF00F0FF),
+                  onPressed: () {
+                    Padding(
+                        padding: const EdgeInsets.only(top: 8, bottom: 15, left: 15, right: 15),
+                    child: Column(
+                    children: <Widget>[
+                    TextField(
+                    //controller: messageController,
+                    decoration: InputDecoration(
+                    labelText: 'Enter your message',
+                    ),
+                    ),
+                    SizedBox(height: 20),
+                    ElevatedButton(
+                    onPressed: () {},
+                    child: Text('Send Message'),
+                    ),
+                    ],
+                    ),
+                    );
+                  },
+                ),
+              ],
+            ),
           ),
+        ],
+      ),
     );
   }
 }
