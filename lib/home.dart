@@ -53,7 +53,12 @@ class _HomeState extends State<Home> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: const Color(0xFFFFE81D),
-        title: const Text('Chat'),
+        title: const Text('Chat', style: TextStyle(
+          fontFamily: 'Caros',
+          color: Colors.black54,
+          fontWeight: FontWeight.bold,
+        )
+        ),
         leading: IconButton(
           icon: const Icon(Icons.person, color: Colors.black),
           onPressed: () {

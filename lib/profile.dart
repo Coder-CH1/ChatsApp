@@ -21,7 +21,8 @@ class _ProfileState extends State<Profile> {
           fontFamily: 'Caros',
           color: Colors.black54,
           fontWeight: FontWeight.bold,
-        )),
+        )
+        ),
       ),
       body: FutureBuilder<ProfileUser?>(
         future: fetchProfileUser(widget.userId),
