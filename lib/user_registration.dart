@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
-import 'package:supabase/supabase.dart';
 import 'home.dart';
 
 class UserRegistration extends StatefulWidget {
@@ -64,7 +63,7 @@ class _UserRegistrationState extends State<UserRegistration> {
           }
           try {
             Navigator.pushReplacement(context,
-              MaterialPageRoute(builder: (context) => Home()),
+              MaterialPageRoute(builder: (context) => const Home()),
             );
           } catch (e) {
             print('Error: $e');
@@ -74,7 +73,7 @@ class _UserRegistrationState extends State<UserRegistration> {
         }
       } else {
           ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text('invalid otp')),
+            const SnackBar(content: Text('invalid otp')),
           );
         }
       } catch (e) {
@@ -92,12 +91,13 @@ class _UserRegistrationState extends State<UserRegistration> {
     super.dispose();
   }
 
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
-       backgroundColor: Color(0xFFFFE81D),
-        title: Text('Chats Box', style: TextStyle(
+       backgroundColor: const Color(0xFFFFE81D),
+        title: const Text('Chats Box', style: TextStyle(
           fontFamily: 'Caros',
           color: Colors.black54,
           fontWeight: FontWeight.bold,
@@ -115,11 +115,11 @@ class _UserRegistrationState extends State<UserRegistration> {
               child: Column(
                 children: [
                   Padding(
-                    padding: EdgeInsets.only(top: 40, left: 20, right: 20),
+                    padding: const EdgeInsets.only(top: 40, left: 20, right: 20),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text('Connect\nfriends\neasily &\nquickly', style:
+                          const Text('Connect\nfriends\neasily &\nquickly', style:
                           TextStyle(
                               color: Colors.white,
                               fontSize: 45,
@@ -128,7 +128,7 @@ class _UserRegistrationState extends State<UserRegistration> {
                           ),
                             textAlign: TextAlign.left,
                           ),
-                          Text('Our chat app is the perfect way to stay\nconnected with friends and family', style: TextStyle(
+                          const Text('Our chat app is the perfect way to stay\nconnected with friends and family', style: TextStyle(
                             fontSize: 14,
                             fontWeight: FontWeight.normal,
                             color: Colors.black54,
@@ -136,10 +136,10 @@ class _UserRegistrationState extends State<UserRegistration> {
                           ),
                             textAlign: TextAlign.left,
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 20,
                           ),
-                          Text('Sign in with Phone Number', style: TextStyle(
+                          const Text('Sign in with Phone Number', style: TextStyle(
                             fontSize: 24,
                             color: Colors.white,
                             fontWeight: FontWeight.w600,
@@ -149,7 +149,7 @@ class _UserRegistrationState extends State<UserRegistration> {
                             onInputChanged: (PhoneNumber number) {
                               this.number = number;
                             },
-                            selectorConfig: SelectorConfig(
+                            selectorConfig: const SelectorConfig(
                               selectorType: PhoneInputSelectorType.DIALOG,
                             ),
                             initialValue: number,
@@ -170,7 +170,7 @@ class _UserRegistrationState extends State<UserRegistration> {
                               return null;
                             },
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 30,
                           ),
                         ],
@@ -180,7 +180,7 @@ class _UserRegistrationState extends State<UserRegistration> {
                     onPressed: (){
                       _sendOtp();
                     },
-                    child: Text('Send otp', style: TextStyle(
+                    child: const Text('Send otp', style: TextStyle(
                       color: Colors.black54,
                       fontWeight: FontWeight.w500,
                       fontSize: 12,
@@ -222,7 +222,7 @@ class _UserRegistrationState extends State<UserRegistration> {
                     padding: const EdgeInsets.only(left: 15, right: 15),
                     child: TextFormField(
                         controller: displayNameController,
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                         hintText: 'Display name',
                             hintStyle: TextStyle(
                               color: Colors.grey,
@@ -243,7 +243,7 @@ class _UserRegistrationState extends State<UserRegistration> {
                       onPressed: (){
                         _verifyUserAndSignIn();
                       },
-                      child: Text('Sign in', style: TextStyle(
+                      child: const Text('Sign in', style: TextStyle(
                         color: Colors.black54,
                         fontWeight: FontWeight.w500,
                         fontSize: 12,

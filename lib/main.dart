@@ -12,7 +12,7 @@ void main() async {
 // initialize supabase
   String supabaseUrl = dotenv.env['SUPABASE_URL'] ?? '';
   String supabaseKey = dotenv.env['SUPABASE_KEY'] ?? '';
-  await Supabase.initialize(url: supabaseUrl,anonKey: supabaseKey);
+  await Supabase.initialize(url: supabaseUrl, anonKey: supabaseKey);
   runApp(const MyApp());
 }
 
@@ -42,9 +42,9 @@ class Auth extends StatelessWidget {
     final user = Supabase.instance.client.auth.currentUser;
 
     if (user != null) {
-      return Home();
+      return const Home();
     } else {
-      return UserRegistration(phoneNumber: '');
+      return const UserRegistration(phoneNumber: '');
     }
   }
 }

@@ -37,6 +37,6 @@ class ProfileUser {
        .eq('id', userId)
        .single();
 
-   final profileUser = ProfileUser.fromJson(response as Map<String, dynamic>);
+   final profileUser = ProfileUser.fromJson(response);
    return profileUser;
  }

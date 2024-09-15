@@ -1,7 +1,6 @@
 import 'package:chatsapp/profile.dart';
 import 'package:flutter/material.dart';
 import 'package:socket_io_client/socket_io_client.dart' as IO;
-import 'package:socket_io_client/socket_io_client.dart';
 
 
 class Home extends StatefulWidget {
@@ -34,8 +33,6 @@ class _HomeState extends State<Home> {
   });
 }
 
-  @override
-
   void sendMessage(String message) {
     socket.emit('message', message);
   }
@@ -44,24 +41,25 @@ class _HomeState extends State<Home> {
       _messages.add(message);
     });
   }
-  List<String> _messages = [];
+  final List<String> _messages = [];
   @override
   void dispose() {
     socket.disconnect();
     super.dispose();
   }
 
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Color(0xFFFFE81D),
-        title: Text('Chat'),
+        backgroundColor: const Color(0xFFFFE81D),
+        title: const Text('Chat'),
         leading: IconButton(
-          icon: Icon(Icons.person, color: Colors.black),
+          icon: const Icon(Icons.person, color: Colors.black),
           onPressed: () {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => Profile(userId: '')),
+              MaterialPageRoute(builder: (context) => const Profile(userId: '')),
             );
           },
         ),
@@ -82,7 +80,7 @@ class _HomeState extends State<Home> {
             padding: const EdgeInsets.all(8.0),
             child: Row(
               children: <Widget>[
-                Expanded(
+                const Expanded(
                   child: TextField(
                     decoration: InputDecoration(
                       hintText: 'Enter your message...',
@@ -90,23 +88,23 @@ class _HomeState extends State<Home> {
                   ),
                 ),
                 IconButton(
-                  icon: Icon(Icons.send),
-                  color: Color(0xFF00F0FF),
+                  icon: const Icon(Icons.send),
+                  color: const Color(0xFF00F0FF),
                   onPressed: () {
                     Padding(
                         padding: const EdgeInsets.only(top: 8, bottom: 15, left: 15, right: 15),
                     child: Column(
                     children: <Widget>[
-                    TextField(
+                    const TextField(
                     //controller: messageController,
                     decoration: InputDecoration(
                     labelText: 'Enter your message',
                     ),
                     ),
-                    SizedBox(height: 20),
+                    const SizedBox(height: 20),
                     ElevatedButton(
                     onPressed: () {},
-                    child: Text('Send Message'),
+                    child: const Text('Send Message'),
                     ),
                     ],
                     ),

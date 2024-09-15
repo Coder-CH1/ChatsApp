@@ -16,8 +16,8 @@ class _ProfileState extends State<Profile> {
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
-        backgroundColor: Color(0xFF00F0FF),
-        title: Text('Profile', style: TextStyle(
+        backgroundColor: const Color(0xFF00F0FF),
+        title: const Text('Profile', style: TextStyle(
           fontFamily: 'Caros',
           color: Colors.black54,
           fontWeight: FontWeight.bold,
@@ -27,11 +27,11 @@ class _ProfileState extends State<Profile> {
         future: fetchProfileUser(widget.userId),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(child: CircularProgressIndicator());
+            return const Center(child: CircularProgressIndicator());
           } else if (snapshot.hasError) {
             return Center(child: Text('$snapshot.error'));
           } else if (!snapshot.hasData) {
-            return Center(child: Text('no user found'));
+            return const Center(child: Text('no user found'));
           }
         //},
         final profileUser = snapshot.data;
@@ -43,18 +43,18 @@ class _ProfileState extends State<Profile> {
             padding: const EdgeInsets.all(16.0),
             child: Column(
               children: [
-                Icon(
+                const Icon(
                   Icons.person,
                   color: Colors.grey,
                   size: 30,
                 ),
-                SizedBox(height: 10),
-                Text('Name: ${profileUser?.display_name}', style: TextStyle(
+                const SizedBox(height: 10),
+                Text('Name: ${profileUser?.display_name}', style: const TextStyle(
                   color: Colors.grey,
                   fontSize: 18,
                 )),
-                SizedBox(height: 10),
-            Text('Name: ${profileUser?.phone_number}', style: TextStyle(
+                const SizedBox(height: 10),
+            Text('Name: ${profileUser?.phone_number}', style: const TextStyle(
               color: Colors.grey,
               fontSize: 18,
             )),
