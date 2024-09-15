@@ -12,6 +12,28 @@ class Home extends StatefulWidget {
 }
 class _HomeState extends State<Home> {
   late IO.Socket socket;
+
+  void initSocket() {
+  super.initState();
+  socket = IO.io('http://localhost:3001', IO.OptionBuilder()
+      .setTransports(['websocket'])
+      .enableAutoConnect()
+      .build()
+  );
+  socket.on('connect', (_) {
+    print('connected to server');
+  });
+
+  socket.on('message', (data) {
+    print('connected to server');
+    _handleMessage(data);
+  });
+
+  socket.on('disconnect', (_) {
+    print('disconnected from server');
+  });
+}
+
   @override
 
   void sendMessage(String message) {
