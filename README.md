@@ -4,8 +4,7 @@
 
 *Features:*
 
-- Real-time messaging using Socket
-.io.
+- Real-time messaging using Socket.io.
 - Phone user authentication with Supabase.
 - Private/personal chats
 - Responsive UI for mobile devices.
