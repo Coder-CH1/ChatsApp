@@ -2,7 +2,7 @@
 
 - A real-time chat application built with Flutter, powered by Supabase and Socket.io.
 
-*Features:
+*Features:*
 
 - Real-time messaging using Socket
 .io.
