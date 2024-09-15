@@ -3,7 +3,8 @@ import 'package:chatsapp/resusable_widgets/custom_color.dart';
 import 'package:flutter/material.dart';
 
 class Profile extends StatefulWidget {
-  const Profile({super.key});
+  final String userId;
+  const Profile({super.key, required this.userId});
 
   @override
   State<Profile> createState() => _ProfileState();
@@ -23,7 +24,7 @@ class _ProfileState extends State<Profile> {
         )),
       ),
       body: FutureBuilder<ProfileUser?>(
-        future: fetchProfileUser(),
+        future: fetchProfileUser(widget.userId),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return Center(child: CircularProgressIndicator());
