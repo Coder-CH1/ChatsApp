@@ -1,4 +1,3 @@
-
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 class ProfileUser {
@@ -37,7 +36,6 @@ class ProfileUser {
        .select()
        .eq('id', userId)
        .single();
-
 
    final profileUser = ProfileUser.fromJson(response as Map<String, dynamic>);
    return profileUser;

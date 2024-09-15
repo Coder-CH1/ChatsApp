@@ -1,4 +1,5 @@
 
+import 'package:chatsapp/home.dart';
 import 'package:chatsapp/user_registration.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -28,7 +29,22 @@ class MyApp extends StatelessWidget {
         visualDensity: VisualDensity.adaptivePlatformDensity,
         useMaterial3: true,
       ),
-      home: const UserRegistration(phoneNumber: ''),
+      home: const Auth(),
     );
+  }
+}
+
+class Auth extends StatelessWidget {
+  const Auth({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final user = Supabase.instance.client.auth.currentUser;
+
+    if (user != null) {
+      return Home();
+    } else {
+      return UserRegistration(phoneNumber: '');
+    }
   }
 }

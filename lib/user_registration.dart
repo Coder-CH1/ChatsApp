@@ -101,7 +101,8 @@ class _UserRegistrationState extends State<UserRegistration> {
           fontFamily: 'Caros',
           color: Colors.black54,
           fontWeight: FontWeight.bold,
-        )),
+        ),
+        ),
       ),
       body: Container(
         decoration: BoxDecoration(
