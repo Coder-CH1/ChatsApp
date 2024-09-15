@@ -20,6 +20,7 @@ class _UserRegistrationState extends State<UserRegistration> {
   final GlobalKey<FormState> _firstForm = GlobalKey<FormState>();
   final GlobalKey<FormState> _secondForm = GlobalKey<FormState>();
   final TextEditingController phoneNumberController = TextEditingController();
+  final TextEditingController displayNameController = TextEditingController();
   final TextEditingController pinCodeController = TextEditingController();
 
   Future<void> _sendOtp() async {
@@ -56,7 +57,7 @@ class _UserRegistrationState extends State<UserRegistration> {
             'user_id': user.id,
             'created_at': user.createdAt,
             'phone_number': number.phoneNumber,
-            'display_name': 'User'
+            'display_name': displayNameController.text.isNotEmpty ? displayNameController.text : 'User'
           });
           if (profileResponse != null) {
             throw profileResponse.error;
@@ -84,6 +85,13 @@ class _UserRegistrationState extends State<UserRegistration> {
     }
 
   @override
+  void dispose() {
+    phoneNumberController.dispose();
+    pinCodeController.dispose();
+    displayNameController.dispose();
+    super.dispose();
+  }
+
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -106,7 +114,7 @@ class _UserRegistrationState extends State<UserRegistration> {
               child: Column(
                 children: [
                   Padding(
-                    padding: EdgeInsets.only(top: 60, left: 20, right: 20),
+                    padding: EdgeInsets.only(top: 40, left: 20, right: 20),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -128,7 +136,7 @@ class _UserRegistrationState extends State<UserRegistration> {
                             textAlign: TextAlign.left,
                           ),
                           SizedBox(
-                            height: 40,
+                            height: 20,
                           ),
                           Text('Sign in with Phone Number', style: TextStyle(
                             fontSize: 24,
@@ -209,22 +217,36 @@ class _UserRegistrationState extends State<UserRegistration> {
                       return null;
                     },
                   ),
-                  SizedBox(
-                    height: 48,
-                    width: 327,
-                    child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                            backgroundColor: Color(0xFFFFE81D)
+                  Padding(
+                    padding: const EdgeInsets.only(left: 15, right: 15),
+                    child: TextFormField(
+                        controller: displayNameController,
+                      decoration: InputDecoration(
+                        hintText: 'Display name',
+                            hintStyle: TextStyle(
+                              color: Colors.grey,
+                            ),
+                        errorStyle: TextStyle(
+                          color: Colors.red,
                         ),
-                        onPressed: (){
-                          _verifyUserAndSignIn();
-                        },
-                        child: Text('Sign in', style: TextStyle(
-                          color: Colors.black54,
-                          fontWeight: FontWeight.w500,
-                          fontSize: 12,
-                        ))),
-                  )
+                      ),
+                      validator: (val)  {
+                        if (val == null || val.isEmpty) {
+                          return 'Field cannot be empty';
+                        }
+                        return null;
+                      },
+                    ),
+                  ),
+                  TextButton(
+                      onPressed: (){
+                        _verifyUserAndSignIn();
+                      },
+                      child: Text('Sign in', style: TextStyle(
+                        color: Colors.black54,
+                        fontWeight: FontWeight.w500,
+                        fontSize: 12,
+                      )))
                 ]
               )
             ),
