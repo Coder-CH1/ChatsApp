@@ -11,9 +11,18 @@ class Home extends StatefulWidget {
 }
 class _HomeState extends State<Home> {
   late IO.Socket socket;
+  final List<String> _messages = [];
+  final TextEditingController _messagesController = TextEditingController();
+  final String displayName = 'User1';
+  final String recipientName = 'User2';
+
+  @override
+  void initState() {
+    super.initState();
+        initSocket();
+  }
 
   void initSocket() {
-  super.initState();
   socket = IO.io('http://localhost:3001', IO.OptionBuilder()
       .setTransports(['websocket'])
       .enableAutoConnect()
@@ -21,11 +30,14 @@ class _HomeState extends State<Home> {
   );
   socket.on('connect', (_) {
     print('connected to server');
+    socket.emit('register', displayName);
   });
 
-  socket.on('message', (data) {
+  socket.on('private_message', (data) {
     print('connected to server');
-    _handleMessage(data);
+    setState(() {
+      _messages.add('${data['message']}: ${data['message']}');
+    });
   });
 
   socket.on('disconnect', (_) {
@@ -33,15 +45,20 @@ class _HomeState extends State<Home> {
   });
 }
 
-  void sendMessage(String message) {
-    socket.emit('message', message);
-  }
-  void _handleMessage(dynamic message) {
-    setState(() {
-      _messages.add(message);
-    });
-  }
-  final List<String> _messages = [];
+void _sendMessages() {
+    final msg = _messagesController.text;
+    if (msg.isNotEmpty) {
+      socket.emit('private_message', {
+        'to', recipientName,
+        'message', msg,
+      });
+      setState(() {
+        _messages.add('Me $msg');
+        _messagesController.clear();
+      });
+    }
+}
+
   @override
   void dispose() {
     socket.disconnect();
@@ -96,13 +113,14 @@ class _HomeState extends State<Home> {
                   icon: const Icon(Icons.send),
                   color: const Color(0xFF00F0FF),
                   onPressed: () {
+                    _sendMessages();
                     Padding(
                         padding: const EdgeInsets.only(top: 8, bottom: 15, left: 15, right: 15),
                     child: Column(
                     children: <Widget>[
-                    const TextField(
-                    //controller: messageController,
-                    decoration: InputDecoration(
+                    TextField(
+                    controller: _messagesController,
+                    decoration: const InputDecoration(
                     labelText: 'Enter your message',
                     ),
                     ),
