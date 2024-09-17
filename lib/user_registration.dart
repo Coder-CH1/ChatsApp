@@ -94,8 +94,8 @@ class _UserRegistrationState extends State<UserRegistration> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // extendBodyBehindAppBar: true,
-      // extendBody: true,
+      extendBodyBehindAppBar: true,
+      extendBody: true,
       appBar: AppBar(
         elevation: 0,
        backgroundColor: Color(0xFFFFE81D),
