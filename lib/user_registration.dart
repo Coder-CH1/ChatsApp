@@ -93,35 +93,34 @@ class _UserRegistrationState extends State<UserRegistration> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: MediaQuery.of(context).size.height,
-      child: Scaffold(
-        extendBodyBehindAppBar: true,
-        extendBody: true,
-        appBar: AppBar(
-          elevation: 0,
-         backgroundColor: Color(0xFFFFE81D),
-          title: Text('Chats Box', style: TextStyle(
-            fontFamily: 'Caros',
-            color: Colors.black54,
-            fontWeight: FontWeight.bold,
-          ),
-          ),
+    return Scaffold(
+      extendBodyBehindAppBar: true,
+      extendBody: true,
+      appBar: AppBar(
+        elevation: 0,
+       backgroundColor: Color(0xFFFFE81D),
+        title: Text('Chats Box', style: TextStyle(
+          fontFamily: 'Caros',
+          color: Colors.black54,
+          fontWeight: FontWeight.bold,
         ),
-        body: Container(
-          decoration: BoxDecoration(
-            gradient: CustomColor.multiColors,
-          ),
-          child: Column(
-          mainAxisSize: MainAxisSize.min,
-            children: [
-              Form(
+        ),
+      ),
+      body: Container(
+        decoration: BoxDecoration(
+          gradient: CustomColor.multiColors,
+        ),
+        child: Column(
+        mainAxisSize: MainAxisSize.min,
+          children: [
+            Expanded(
+              child: Form(
                 key: _firstForm,
                 child: Column(
                   //crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Padding(
-                      padding: EdgeInsets.only(top: 200, left: 20, right: 20),
+                      padding: EdgeInsets.only(top: 150, left: 10, right: 20),
                       child: Column(
                           children: [
                              Text('Connect\nfriends\neasily &\nquickly', style:
@@ -252,16 +251,16 @@ class _UserRegistrationState extends State<UserRegistration> {
                   ],
                 ),
               ),
-              // Form(
-              //   key: _secondForm,
-              //   child: Column(
-              //     children: [
-              //
-              //     ]
-              //   )
-              // ),
-            ],
-          ),
+            ),
+            // Form(
+            //   key: _secondForm,
+            //   child: Column(
+            //     children: [
+            //
+            //     ]
+            //   )
+            // ),
+          ],
         ),
       ),
     );
