@@ -93,40 +93,41 @@ class _UserRegistrationState extends State<UserRegistration> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      extendBodyBehindAppBar: true,
-      extendBody: true,
-      appBar: AppBar(
-        elevation: 0,
-       backgroundColor: Color(0xFFFFE81D),
-        title: Text('Chats Box', style: TextStyle(
-          fontFamily: 'Caros',
-          color: Colors.black54,
-          fontWeight: FontWeight.bold,
+    return Container(
+      height: MediaQuery.of(context).size.height,
+      child: Scaffold(
+        extendBodyBehindAppBar: true,
+        extendBody: true,
+        appBar: AppBar(
+          elevation: 0,
+         backgroundColor: Color(0xFFFFE81D),
+          title: Text('Chats Box', style: TextStyle(
+            fontFamily: 'Caros',
+            color: Colors.black54,
+            fontWeight: FontWeight.bold,
+          ),
+          ),
         ),
-        ),
-      ),
-      body: SingleChildScrollView(
-        child: Container(
-          height: MediaQuery.of(context).size.height,
+        body: Container(
           decoration: BoxDecoration(
             gradient: CustomColor.multiColors,
           ),
           child: Column(
+          mainAxisSize: MainAxisSize.min,
             children: [
               Form(
                 key: _firstForm,
                 child: Column(
+                  //crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Padding(
-                      padding: EdgeInsets.only(top: 40, left: 20, right: 20),
+                      padding: EdgeInsets.only(top: 200, left: 20, right: 20),
                       child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                              Text('Connect\nfriends\neasily &\nquickly', style:
                             TextStyle(
                                 color: Colors.white,
-                                fontSize: 30,
+                                fontSize: 50,
                               fontWeight: FontWeight.bold,
                               fontFamily: 'Caros',
                             ),
@@ -236,6 +237,9 @@ class _UserRegistrationState extends State<UserRegistration> {
                         },
                       ),
                     ),
+                   // SizedBox(
+                   //   height: 10,
+                   // ),
                     TextButton(
                         onPressed: (){
                           _verifyUserAndSignIn();
