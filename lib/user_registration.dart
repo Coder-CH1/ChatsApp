@@ -106,154 +106,158 @@ class _UserRegistrationState extends State<UserRegistration> {
         ),
         ),
       ),
-      body: Container(
-        decoration: BoxDecoration(
-          gradient: CustomColor.multiColors,
-        ),
-        child: Column(
-          children: [
-            Form(
-              key: _firstForm,
-              child: Column(
-                children: [
-                  Padding(
-                    padding: EdgeInsets.only(top: 40, left: 20, right: 20),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                           Text('Connect\nfriends\neasily &\nquickly', style:
-                          TextStyle(
+      body: SingleChildScrollView(
+        child: Container(
+          height: MediaQuery.of(context).size.height,
+          decoration: BoxDecoration(
+            gradient: CustomColor.multiColors,
+          ),
+          child: Column(
+            children: [
+              Form(
+                key: _firstForm,
+                child: Column(
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.only(top: 40, left: 20, right: 20),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                             Text('Connect\nfriends\neasily &\nquickly', style:
+                            TextStyle(
+                                color: Colors.white,
+                                fontSize: 30,
+                              fontWeight: FontWeight.bold,
+                              fontFamily: 'Caros',
+                            ),
+                              textAlign: TextAlign.left,
+                            ),
+                             Text('Our chat app is the perfect way to stay\nconnected with friends and family', style: TextStyle(
+                              fontSize: 14,
+                              fontWeight: FontWeight.normal,
+                              color: Colors.black54,
+                              fontFamily: 'Caros',
+                            ),
+                              textAlign: TextAlign.left,
+                            ),
+                             SizedBox(
+                              height: 20,
+                            ),
+                             Text('Sign in with Phone Number', style: TextStyle(
+                              fontSize: 24,
                               color: Colors.white,
-                              fontSize: 30,
-                            fontWeight: FontWeight.bold,
-                            fontFamily: 'Caros',
-                          ),
-                            textAlign: TextAlign.left,
-                          ),
-                           Text('Our chat app is the perfect way to stay\nconnected with friends and family', style: TextStyle(
-                            fontSize: 14,
-                            fontWeight: FontWeight.normal,
-                            color: Colors.black54,
-                            fontFamily: 'Caros',
-                          ),
-                            textAlign: TextAlign.left,
-                          ),
-                           SizedBox(
-                            height: 20,
-                          ),
-                           Text('Sign in with Phone Number', style: TextStyle(
-                            fontSize: 24,
-                            color: Colors.white,
-                            fontWeight: FontWeight.w600,
-                          ),
-                          ),
-                          InternationalPhoneNumberInput(
-                            onInputChanged: (PhoneNumber number) {
-                              this.number = number;
-                            },
-                            selectorConfig: SelectorConfig(
-                              selectorType: PhoneInputSelectorType.DIALOG,
+                              fontWeight: FontWeight.w600,
                             ),
-                            initialValue: number,
-                            textFieldController: phoneNumberController,
-                            keyboardType: TextInputType.phone,
-                            formatInput: false,
-                            inputDecoration: InputDecoration(
-                                hintText: 'phone number',
-                              hintStyle: TextStyle(
-                              color: Colors.grey,
                             ),
-                              errorStyle: TextStyle(color: Colors.red),
+                            InternationalPhoneNumberInput(
+                              onInputChanged: (PhoneNumber number) {
+                                this.number = number;
+                              },
+                              selectorConfig: SelectorConfig(
+                                selectorType: PhoneInputSelectorType.DIALOG,
+                              ),
+                              initialValue: number,
+                              textFieldController: phoneNumberController,
+                              keyboardType: TextInputType.phone,
+                              formatInput: false,
+                              inputDecoration: InputDecoration(
+                                  hintText: 'phone number',
+                                hintStyle: TextStyle(
+                                color: Colors.grey,
+                              ),
+                                errorStyle: TextStyle(color: Colors.red),
+                              ),
+                              validator: (val) {
+                                if (val == null || val.isEmpty) {
+                                 return 'Phone number cannot be empty';
+                                }
+                                return null;
+                              },
                             ),
-                            validator: (val) {
-                              if (val == null || val.isEmpty) {
-                               return 'Phone number cannot be empty';
-                              }
-                              return null;
-                            },
-                          ),
-                           SizedBox(
-                            height: 10,
-                          ),
-                        ],
-                      ),
-                  ),
-                TextButton(
-                    onPressed: (){
-                      _sendOtp();
-                    },
-                    child: Text('Send otp', style: TextStyle(
-                      color: Colors.black54,
-                      fontWeight: FontWeight.w500,
-                      fontSize: 12,
-                    ))),
-                ],
-              ),
-            ),
-            Form(
-              key: _secondForm,
-              child: Column(
-                children: [
-                  PinCodeTextField(
-                    controller: pinCodeController,
-                    pinTheme: PinTheme(
-                      shape: PinCodeFieldShape.box,
-                      borderRadius: BorderRadius.circular(4),
-                      fieldHeight: 52,
-                      fieldWidth: 51,
-                      activeFillColor: Colors.transparent,
-                      activeColor: Colors.grey,
-                      inactiveColor: Colors.grey,
-                      errorBorderColor: Colors.red,
-                      borderWidth: 0.2,
-                    ),
-                    backgroundColor: Colors.transparent,
-                    appContext: context,
-                    length: 6,
-                    autoFocus: true,
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    cursorColor: Colors.grey, onChanged: (String value) {  },
-                    validator: (val) {
-                      if (val == null || val.isEmpty) {
-                        return 'Field cannot be empty';
-                      }
-                      return null;
-                    },
-                  ),
-                  Padding(
-                    padding: EdgeInsets.only(left: 15, right: 15),
-                    child: TextFormField(
-                        controller: displayNameController,
-                      decoration: InputDecoration(
-                        hintText: 'Display name',
-                            hintStyle: TextStyle(
-                              color: Colors.grey,
+                             SizedBox(
+                              height: 10,
                             ),
-                        errorStyle: TextStyle(
-                          color: Colors.red,
+                          ],
                         ),
+                    ),
+                  TextButton(
+                      onPressed: (){
+                        _sendOtp();
+                      },
+                      child: Text('Send otp', style: TextStyle(
+                        color: Colors.black54,
+                        fontWeight: FontWeight.w500,
+                        fontSize: 12,
+                      ))),
+                    PinCodeTextField(
+                      controller: pinCodeController,
+                      pinTheme: PinTheme(
+                        shape: PinCodeFieldShape.box,
+                        borderRadius: BorderRadius.circular(4),
+                        fieldHeight: 52,
+                        fieldWidth: 51,
+                        activeFillColor: Colors.transparent,
+                        activeColor: Colors.grey,
+                        inactiveColor: Colors.grey,
+                        errorBorderColor: Colors.red,
+                        borderWidth: 0.2,
                       ),
-                      validator: (val)  {
+                      backgroundColor: Colors.transparent,
+                      appContext: context,
+                      length: 6,
+                      autoFocus: true,
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      cursorColor: Colors.grey, onChanged: (String value) {  },
+                      validator: (val) {
                         if (val == null || val.isEmpty) {
                           return 'Field cannot be empty';
                         }
                         return null;
                       },
                     ),
-                  ),
-                  TextButton(
-                      onPressed: (){
-                        _verifyUserAndSignIn();
-                      },
-                      child:  Text('Sign in', style: TextStyle(
-                        color: Colors.black54,
-                        fontWeight: FontWeight.w500,
-                        fontSize: 12,
-                      )))
-                ]
-              )
-            ),
-          ],
+                    Padding(
+                      padding: EdgeInsets.only(left: 15, right: 15),
+                      child: TextFormField(
+                        controller: displayNameController,
+                        decoration: InputDecoration(
+                          hintText: 'Display name',
+                          hintStyle: TextStyle(
+                            color: Colors.grey,
+                          ),
+                          errorStyle: TextStyle(
+                            color: Colors.red,
+                          ),
+                        ),
+                        validator: (val)  {
+                          if (val == null || val.isEmpty) {
+                            return 'Field cannot be empty';
+                          }
+                          return null;
+                        },
+                      ),
+                    ),
+                    TextButton(
+                        onPressed: (){
+                          _verifyUserAndSignIn();
+                        },
+                        child:  Text('Sign in', style: TextStyle(
+                          color: Colors.black54,
+                          fontWeight: FontWeight.w500,
+                          fontSize: 12,
+                        )))
+                  ],
+                ),
+              ),
+              // Form(
+              //   key: _secondForm,
+              //   child: Column(
+              //     children: [
+              //
+              //     ]
+              //   )
+              // ),
+            ],
+          ),
         ),
       ),
     );
