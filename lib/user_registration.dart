@@ -16,8 +16,8 @@ class UserRegistration extends StatefulWidget {
 class _UserRegistrationState extends State<UserRegistration> {
   String initialCountry = '';
   PhoneNumber number = PhoneNumber(isoCode: 'NG');
-  final GlobalKey<FormState> _firstForm = GlobalKey<FormState>();
-  final GlobalKey<FormState> _secondForm = GlobalKey<FormState>();
+  final GlobalKey<FormState> _form = GlobalKey<FormState>();
+  //final GlobalKey<FormState> _secondForm = GlobalKey<FormState>();
   final TextEditingController phoneNumberController = TextEditingController();
   final TextEditingController displayNameController = TextEditingController();
   final TextEditingController pinCodeController = TextEditingController();
@@ -25,7 +25,7 @@ class _UserRegistrationState extends State<UserRegistration> {
   Future<void> _sendOtp() async {
     final phoneNumber = number.phoneNumber;
     print('$phoneNumber');
-    if(!_firstForm.currentState!.validate()) return;
+    if(!_form.currentState!.validate()) return;
 
     try {
       final response = await Supabase.instance.client.auth.signInWithOtp(
@@ -40,7 +40,7 @@ class _UserRegistrationState extends State<UserRegistration> {
   }
 
   Future<void> _verifyUserAndSignIn() async {
-    if (!_secondForm.currentState!.validate()) return;
+    if (!_form.currentState!.validate()) return;
     try {
       final response = await Supabase.instance.client.auth.verifyOTP(
           phone:  number.phoneNumber,
@@ -110,76 +110,78 @@ class _UserRegistrationState extends State<UserRegistration> {
         decoration: BoxDecoration(
           gradient: CustomColor.multiColors,
         ),
-        child: Column(
-        mainAxisSize: MainAxisSize.min,
-          children: [
-            Expanded(
-              child: Form(
-                key: _firstForm,
-                child: Column(
-                  children: [
-                    Padding(
-                      padding: EdgeInsets.only(top: 150, left: 10, right: 20),
-                      child: Column(
-                          children: [
-                             Text('Connect\nfriends\neasily &\nquickly', style:
-                            TextStyle(
-                                color: Colors.white,
-                                fontSize: 50,
-                              fontWeight: FontWeight.bold,
-                              fontFamily: 'Caros',
-                            ),
-                              textAlign: TextAlign.left,
-                            ),
-                             Text('Our chat app is the perfect way to stay\nconnected with friends and family', style: TextStyle(
-                              fontSize: 14,
-                              fontWeight: FontWeight.normal,
-                              color: Colors.black54,
-                              fontFamily: 'Caros',
-                            ),
-                              textAlign: TextAlign.left,
-                            ),
-                             SizedBox(
-                              height: 20,
-                            ),
-                             Text('Sign in with Phone Number', style: TextStyle(
-                              fontSize: 24,
-                              color: Colors.white,
-                              fontWeight: FontWeight.w600,
-                            ),
-                            ),
-                            InternationalPhoneNumberInput(
-                              onInputChanged: (PhoneNumber number) {
-                                this.number = number;
-                              },
-                              selectorConfig: SelectorConfig(
-                                selectorType: PhoneInputSelectorType.DIALOG,
-                              ),
-                              initialValue: number,
-                              textFieldController: phoneNumberController,
-                              keyboardType: TextInputType.phone,
-                              formatInput: false,
-                              inputDecoration: InputDecoration(
-                                  hintText: 'phone number',
-                                hintStyle: TextStyle(
-                                color: Colors.grey,
-                              ),
-                                errorStyle: TextStyle(color: Colors.red),
-                              ),
-                              validator: (val) {
-                                if (val == null || val.isEmpty) {
-                                 return 'Phone number cannot be empty';
-                                }
-                                return null;
-                              },
-                            ),
-                             SizedBox(
-                              height: 10,
-                            ),
-                          ],
+        child: Expanded(
+          child: Form(
+            key: _form,
+            child: Padding(
+              padding: const EdgeInsets.only(top: 120),
+              child: Column(
+                children: [
+                  Column(
+                      children: [
+                         Text('Connect\nfriends\neasily &\nquickly', style:
+                        TextStyle(
+                            color: Colors.white,
+                            fontSize: 50,
+                          fontWeight: FontWeight.bold,
+                          fontFamily: 'Caros',
                         ),
+                          textAlign: TextAlign.left,
+                        ),
+                         Text('Our chat app is the perfect way to stay\nconnected with friends and family', style: TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.normal,
+                          color: Colors.black54,
+                          fontFamily: 'Caros',
+                        ),
+                          textAlign: TextAlign.left,
+                        ),
+                         SizedBox(
+                          height: 20,
+                        ),
+                         Text('Sign in with Phone Number', style: TextStyle(
+                          fontSize: 24,
+                          color: Colors.white,
+                          fontWeight: FontWeight.w600,
+                        ),
+                           textAlign: TextAlign.center,
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(right: 20, left: 20),
+                          child: InternationalPhoneNumberInput(
+                            onInputChanged: (PhoneNumber number) {
+                              this.number = number;
+                            },
+                            selectorConfig: SelectorConfig(
+                              selectorType: PhoneInputSelectorType.DIALOG,
+                            ),
+                            initialValue: number,
+                            textFieldController: phoneNumberController,
+                            keyboardType: TextInputType.phone,
+                            formatInput: false,
+                            inputDecoration: InputDecoration(
+                                hintText: 'phone number',
+                              hintStyle: TextStyle(
+                              color: Colors.grey,
+                            ),
+                              errorStyle: TextStyle(color: Colors.red),
+                            ),
+                            validator: (val) {
+                              if (val == null || val.isEmpty) {
+                               return 'Phone number cannot be empty';
+                              }
+                              return null;
+                            },
+                          ),
+                        ),
+                         SizedBox(
+                          height: 10,
+                        ),
+                      ],
                     ),
-                  TextButton(
+                Padding(
+                  padding: const EdgeInsets.only(right: 20, left: 20),
+                  child: TextButton(
                       onPressed: (){
                         _sendOtp();
                       },
@@ -188,7 +190,10 @@ class _UserRegistrationState extends State<UserRegistration> {
                         fontWeight: FontWeight.w500,
                         fontSize: 12,
                       ))),
-                    PinCodeTextField(
+                ),
+                  Padding(
+                    padding: const EdgeInsets.only(right: 20, left: 20),
+                    child: PinCodeTextField(
                       controller: pinCodeController,
                       pinTheme: PinTheme(
                         shape: PinCodeFieldShape.box,
@@ -214,28 +219,31 @@ class _UserRegistrationState extends State<UserRegistration> {
                         return null;
                       },
                     ),
-                    Padding(
-                      padding: EdgeInsets.only(left: 15, right: 15),
-                      child: TextFormField(
-                        controller: displayNameController,
-                        decoration: InputDecoration(
-                          hintText: 'Display name',
-                          hintStyle: TextStyle(
-                            color: Colors.grey,
-                          ),
-                          errorStyle: TextStyle(
-                            color: Colors.red,
-                          ),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(left: 15, right: 15),
+                    child: TextFormField(
+                      controller: displayNameController,
+                      decoration: InputDecoration(
+                        hintText: 'Display name',
+                        hintStyle: TextStyle(
+                          color: Colors.grey,
                         ),
-                        validator: (val)  {
-                          if (val == null || val.isEmpty) {
-                            return 'Field cannot be empty';
-                          }
-                          return null;
-                        },
+                        errorStyle: TextStyle(
+                          color: Colors.red,
+                        ),
                       ),
+                      validator: (val)  {
+                        if (val == null || val.isEmpty) {
+                          return 'Field cannot be empty';
+                        }
+                        return null;
+                      },
                     ),
-                    TextButton(
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(right: 20, left: 20),
+                    child: TextButton(
                         onPressed: (){
                           _verifyUserAndSignIn();
                         },
@@ -243,12 +251,12 @@ class _UserRegistrationState extends State<UserRegistration> {
                           color: Colors.black54,
                           fontWeight: FontWeight.w500,
                           fontSize: 12,
-                        )))
-                  ],
-                ),
+                        ))),
+                  )
+                ],
               ),
             ),
-          ],
+          ),
         ),
       ),
     );
