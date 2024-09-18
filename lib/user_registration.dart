@@ -17,7 +17,6 @@ class _UserRegistrationState extends State<UserRegistration> {
   String initialCountry = '';
   PhoneNumber number = PhoneNumber(isoCode: 'NG');
   final GlobalKey<FormState> _form = GlobalKey<FormState>();
-  //final GlobalKey<FormState> _secondForm = GlobalKey<FormState>();
   final TextEditingController phoneNumberController = TextEditingController();
   final TextEditingController displayNameController = TextEditingController();
   final TextEditingController pinCodeController = TextEditingController();
@@ -31,6 +30,12 @@ class _UserRegistrationState extends State<UserRegistration> {
       final response = await Supabase.instance.client.auth.signInWithOtp(
         phone: phoneNumber,
       );
+
+      // if (response. != null) {
+      //   await Supabase.instance.client.from('profiles').upsert({
+      //
+      //   });
+      // }
 
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
@@ -119,23 +124,35 @@ class _UserRegistrationState extends State<UserRegistration> {
                 children: [
                   Column(
                       children: [
-                         Text('Connect\nfriends\neasily &\nquickly', style:
-                        TextStyle(
-                            color: Colors.white,
-                            fontSize: 50,
-                          fontWeight: FontWeight.bold,
-                          fontFamily: 'Caros',
-                        ),
-                          textAlign: TextAlign.left,
-                        ),
-                         Text('Our chat app is the perfect way to stay\nconnected with friends and family', style: TextStyle(
-                          fontSize: 14,
-                          fontWeight: FontWeight.normal,
-                          color: Colors.black54,
-                          fontFamily: 'Caros',
-                        ),
-                          textAlign: TextAlign.left,
-                        ),
+                         Align(
+                           alignment: Alignment.topLeft,
+                           child: Padding(
+                             padding: const EdgeInsets.only(left: 20),
+                             child: Text('Connect\nfriends\neasily &\nquickly', style:
+                                                   TextStyle(
+                                color: Colors.white,
+                                fontSize: 50,
+                              fontWeight: FontWeight.bold,
+                              fontFamily: 'Caros',
+                                                   ),
+                              textAlign: TextAlign.left,
+                                                   ),
+                           ),
+                         ),
+                         Align(
+                           alignment: Alignment.topLeft,
+                           child: Padding(
+                             padding: const EdgeInsets.only(left: 20),
+                             child: Text('Our chat app is the perfect way to stay\nconnected with friends and family', style: TextStyle(
+                              fontSize: 14,
+                              fontWeight: FontWeight.normal,
+                              color: Colors.black54,
+                              fontFamily: 'Caros',
+                                                     ),
+                              textAlign: TextAlign.left,
+                                                     ),
+                           ),
+                         ),
                          SizedBox(
                           height: 20,
                         ),
