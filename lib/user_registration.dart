@@ -117,7 +117,6 @@ class _UserRegistrationState extends State<UserRegistration> {
               child: Form(
                 key: _firstForm,
                 child: Column(
-                  //crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Padding(
                       padding: EdgeInsets.only(top: 150, left: 10, right: 20),
@@ -236,9 +235,6 @@ class _UserRegistrationState extends State<UserRegistration> {
                         },
                       ),
                     ),
-                   // SizedBox(
-                   //   height: 10,
-                   // ),
                     TextButton(
                         onPressed: (){
                           _verifyUserAndSignIn();
@@ -252,14 +248,6 @@ class _UserRegistrationState extends State<UserRegistration> {
                 ),
               ),
             ),
-            // Form(
-            //   key: _secondForm,
-            //   child: Column(
-            //     children: [
-            //
-            //     ]
-            //   )
-            // ),
           ],
         ),
       ),
