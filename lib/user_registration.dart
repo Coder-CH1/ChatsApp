@@ -27,15 +27,12 @@ class _UserRegistrationState extends State<UserRegistration> {
     if(!_form.currentState!.validate()) return;
 
     try {
-      final response = await Supabase.instance.client.auth.signInWithOtp(
+       await Supabase.instance.client.auth.signInWithOtp(
         phone: phoneNumber,
       );
-
-      // if (response. != null) {
-      //   await Supabase.instance.client.from('profiles').upsert({
-      //
-      //   });
-      // }
+       ScaffoldMessenger.of(context).showSnackBar(
+         const SnackBar(content: Text('Otp sent successfully: check your message')),
+       );
 
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
