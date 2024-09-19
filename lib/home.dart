@@ -29,7 +29,7 @@ class _HomeState extends State<Home> {
       .build()
   );
   socket.on('connect', (_) {
-    print('connected to server');
+    throw Exception('connected to server');
     socket.emit('register', displayName);
   });
 

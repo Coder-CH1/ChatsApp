@@ -68,7 +68,7 @@ class _UserRegistrationState extends State<UserRegistration> {
               MaterialPageRoute(builder: (context) => const Home()),
             );
           } catch (e) {
-            print('Error: $e');
+            throw Exception('Error: $e');
           }
         } else {
           throw Exception('user authentication failed');
