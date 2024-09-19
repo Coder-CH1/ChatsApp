@@ -112,14 +112,14 @@ class _UserRegistrationState extends State<UserRegistration> {
         decoration: BoxDecoration(
           gradient: CustomColor.multiColors,
         ),
-        child: Expanded(
-          child: Form(
-            key: _form,
-            child: Padding(
-              padding: const EdgeInsets.only(top: 120),
-              child: Column(
-                children: [
-                  Column(
+        child: Form(
+          key: _form,
+          child: Padding(
+            padding: const EdgeInsets.only(top: 120),
+            child: Column(
+              children: [
+                Expanded(
+                  child: Column(
                       children: [
                          Align(
                            alignment: Alignment.topLeft,
@@ -188,87 +188,85 @@ class _UserRegistrationState extends State<UserRegistration> {
                             },
                           ),
                         ),
-                         SizedBox(
-                          height: 10,
+                        Padding(
+                          padding: const EdgeInsets.only(right: 20, left: 20),
+                          child: TextButton(
+                              onPressed: (){
+                                _sendOtp();
+                              },
+                              child: Text('Send otp', style: TextStyle(
+                                color: Colors.black54,
+                                fontWeight: FontWeight.w500,
+                                fontSize: 12,
+                              ))),
                         ),
+                        Padding(
+                          padding: const EdgeInsets.only(right: 20, left: 20),
+                          child: PinCodeTextField(
+                            controller: pinCodeController,
+                            pinTheme: PinTheme(
+                              shape: PinCodeFieldShape.box,
+                              borderRadius: BorderRadius.circular(4),
+                              fieldHeight: 52,
+                              fieldWidth: 51,
+                              activeFillColor: Colors.transparent,
+                              activeColor: Colors.grey,
+                              inactiveColor: Colors.grey,
+                              errorBorderColor: Colors.red,
+                              borderWidth: 0.2,
+                            ),
+                            backgroundColor: Colors.transparent,
+                            appContext: context,
+                            length: 6,
+                            autoFocus: true,
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            cursorColor: Colors.grey, onChanged: (String value) {  },
+                            validator: (val) {
+                              if (val == null || val.isEmpty) {
+                                return 'Field cannot be empty';
+                              }
+                              return null;
+                            },
+                          ),
+                        ),
+                        Padding(
+                          padding: EdgeInsets.only(left: 15, right: 15),
+                          child: TextFormField(
+                            controller: displayNameController,
+                            decoration: InputDecoration(
+                              hintText: 'Display name',
+                              hintStyle: TextStyle(
+                                color: Colors.grey,
+                              ),
+                              errorStyle: TextStyle(
+                                color: Colors.red,
+                              ),
+                            ),
+                            validator: (val)  {
+                              if (val == null || val.isEmpty) {
+                                return 'Field cannot be empty';
+                              }
+                              return null;
+                            },
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(right: 20, left: 20),
+                          child: TextButton(
+                              onPressed: (){
+                                _verifyUserAndSignIn();
+                              },
+                              child:  Text('Sign in', style: TextStyle(
+                                color: Colors.black54,
+                                fontWeight: FontWeight.w500,
+                                fontSize: 12,
+                              ))),
+                        )
                       ],
                     ),
-                Padding(
-                  padding: const EdgeInsets.only(right: 20, left: 20),
-                  child: TextButton(
-                      onPressed: (){
-                        _sendOtp();
-                      },
-                      child: Text('Send otp', style: TextStyle(
-                        color: Colors.black54,
-                        fontWeight: FontWeight.w500,
-                        fontSize: 12,
-                      ))),
                 ),
-                  Padding(
-                    padding: const EdgeInsets.only(right: 20, left: 20),
-                    child: PinCodeTextField(
-                      controller: pinCodeController,
-                      pinTheme: PinTheme(
-                        shape: PinCodeFieldShape.box,
-                        borderRadius: BorderRadius.circular(4),
-                        fieldHeight: 52,
-                        fieldWidth: 51,
-                        activeFillColor: Colors.transparent,
-                        activeColor: Colors.grey,
-                        inactiveColor: Colors.grey,
-                        errorBorderColor: Colors.red,
-                        borderWidth: 0.2,
-                      ),
-                      backgroundColor: Colors.transparent,
-                      appContext: context,
-                      length: 6,
-                      autoFocus: true,
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      cursorColor: Colors.grey, onChanged: (String value) {  },
-                      validator: (val) {
-                        if (val == null || val.isEmpty) {
-                          return 'Field cannot be empty';
-                        }
-                        return null;
-                      },
-                    ),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.only(left: 15, right: 15),
-                    child: TextFormField(
-                      controller: displayNameController,
-                      decoration: InputDecoration(
-                        hintText: 'Display name',
-                        hintStyle: TextStyle(
-                          color: Colors.grey,
-                        ),
-                        errorStyle: TextStyle(
-                          color: Colors.red,
-                        ),
-                      ),
-                      validator: (val)  {
-                        if (val == null || val.isEmpty) {
-                          return 'Field cannot be empty';
-                        }
-                        return null;
-                      },
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(right: 20, left: 20),
-                    child: TextButton(
-                        onPressed: (){
-                          _verifyUserAndSignIn();
-                        },
-                        child:  Text('Sign in', style: TextStyle(
-                          color: Colors.black54,
-                          fontWeight: FontWeight.w500,
-                          fontSize: 12,
-                        ))),
-                  )
-                ],
-              ),
+
+              ],
             ),
           ),
         ),
