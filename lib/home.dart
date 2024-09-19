@@ -1,6 +1,7 @@
 import 'package:chatsapp/profile.dart';
 import 'package:flutter/material.dart';
 import 'package:socket_io_client/socket_io_client.dart' as IO;
+import 'package:logging/logging.dart';
 
 
 class Home extends StatefulWidget {
@@ -15,6 +16,7 @@ class _HomeState extends State<Home> {
   final TextEditingController _messagesController = TextEditingController();
   final String displayName = 'User1';
   final String recipientName = 'User2';
+  final log = Logger('');
 
   @override
   void initState() {
@@ -29,7 +31,7 @@ class _HomeState extends State<Home> {
       .build()
   );
   socket.on('connect', (_) {
-    throw Exception('connected to server');
+    log.info('connected to server');
     socket.emit('register', displayName);
   });
 
@@ -41,7 +43,7 @@ class _HomeState extends State<Home> {
   });
 
   socket.on('disconnect', (_) {
-    print('disconnected from server');
+    log.warning('disconnected from server');
   });
 }
 

@@ -4,6 +4,7 @@ import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'home.dart';
+import 'package:logging/logging.dart';
 
 class UserRegistration extends StatefulWidget {
   final String phoneNumber;
@@ -20,10 +21,11 @@ class _UserRegistrationState extends State<UserRegistration> {
   final TextEditingController phoneNumberController = TextEditingController();
   final TextEditingController displayNameController = TextEditingController();
   final TextEditingController pinCodeController = TextEditingController();
+  final log = Logger('');
 
   Future<void> _sendOtp() async {
     final phoneNumber = number.phoneNumber;
-    print('$phoneNumber');
+    log.info('$phoneNumber');
     if(!_form.currentState!.validate()) return;
 
     try {
@@ -68,10 +70,10 @@ class _UserRegistrationState extends State<UserRegistration> {
               MaterialPageRoute(builder: (context) => const Home()),
             );
           } catch (e) {
-            throw Exception('Error: $e');
+            log.warning('Error: $e');
           }
         } else {
-          throw Exception('user authentication failed');
+          log.warning('user authentication failed');
         }
       } else {
           ScaffoldMessenger.of(context).showSnackBar(
