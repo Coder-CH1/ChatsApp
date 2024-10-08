@@ -2,13 +2,13 @@
 
 - A real-time chat application built with Flutter, powered by Supabase, Socket.io and Global State Management.
 
-## Features:
+# Features:
 
 - Real-time messaging using Socket.io.
 - Phone user authentication with Supabase.
 - Personal chats.
 
-## Technologies used:
+# Technologies used:
 
 - Flutter for mobile development UI designs 
 - Supabase for backend services which includes authentication, database and storage. 
