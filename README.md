@@ -7,7 +7,6 @@
 - Real-time messaging using Socket.io.
 - Phone user authentication with Supabase.
 - Personal chats.
-- Responsive UI for mobile devices.
 
 # Technologies used:
 
