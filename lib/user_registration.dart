@@ -102,8 +102,8 @@ class _UserRegistrationState extends State<UserRegistration> {
       extendBody: true,
       appBar: AppBar(
         elevation: 0,
-       backgroundColor: Color(0xFFFFE81D),
-        title: Text('Chats Box', style: TextStyle(
+       backgroundColor: const Color(0xFFFFE81D),
+        title: const Text('Chats Box', style: TextStyle(
           fontFamily: 'Caros',
           color: Colors.black54,
           fontWeight: FontWeight.bold,
@@ -123,10 +123,10 @@ class _UserRegistrationState extends State<UserRegistration> {
                 Expanded(
                   child: Column(
                       children: [
-                         Align(
+                         const Align(
                            alignment: Alignment.topLeft,
                            child: Padding(
-                             padding: const EdgeInsets.only(left: 20),
+                             padding: EdgeInsets.only(left: 20),
                              child: Text('Connect\nfriends\neasily &\nquickly', style:
                                                    TextStyle(
                                 color: Colors.white,
@@ -138,10 +138,10 @@ class _UserRegistrationState extends State<UserRegistration> {
                                                    ),
                            ),
                          ),
-                         Align(
+                         const Align(
                            alignment: Alignment.topLeft,
                            child: Padding(
-                             padding: const EdgeInsets.only(left: 20),
+                             padding: EdgeInsets.only(left: 20),
                              child: Text('Our chat app is the perfect way to stay\nconnected with friends and family', style: TextStyle(
                               fontSize: 14,
                               fontWeight: FontWeight.normal,
@@ -152,10 +152,10 @@ class _UserRegistrationState extends State<UserRegistration> {
                                                      ),
                            ),
                          ),
-                         SizedBox(
+                         const SizedBox(
                           height: 20,
                         ),
-                         Text('Sign in with Phone Number', style: TextStyle(
+                         const Text('Sign in with Phone Number', style: TextStyle(
                           fontSize: 24,
                           color: Colors.white,
                           fontWeight: FontWeight.w600,
@@ -168,14 +168,14 @@ class _UserRegistrationState extends State<UserRegistration> {
                             onInputChanged: (PhoneNumber number) {
                               this.number = number;
                             },
-                            selectorConfig: SelectorConfig(
+                            selectorConfig: const SelectorConfig(
                               selectorType: PhoneInputSelectorType.DIALOG,
                             ),
                             initialValue: number,
                             textFieldController: phoneNumberController,
                             keyboardType: TextInputType.phone,
                             formatInput: false,
-                            inputDecoration: InputDecoration(
+                            inputDecoration: const InputDecoration(
                                 hintText: 'phone number',
                               hintStyle: TextStyle(
                               color: Colors.grey,
@@ -196,7 +196,7 @@ class _UserRegistrationState extends State<UserRegistration> {
                               onPressed: (){
                                 _sendOtp();
                               },
-                              child: Text('Send otp', style: TextStyle(
+                              child: const Text('Send otp', style: TextStyle(
                                 color: Colors.black54,
                                 fontWeight: FontWeight.w500,
                                 fontSize: 12,
@@ -232,10 +232,10 @@ class _UserRegistrationState extends State<UserRegistration> {
                           ),
                         ),
                         Padding(
-                          padding: EdgeInsets.only(left: 15, right: 15),
+                          padding: const EdgeInsets.only(left: 15, right: 15),
                           child: TextFormField(
                             controller: displayNameController,
-                            decoration: InputDecoration(
+                            decoration: const InputDecoration(
                               hintText: 'Display name',
                               hintStyle: TextStyle(
                                 color: Colors.grey,
@@ -258,7 +258,7 @@ class _UserRegistrationState extends State<UserRegistration> {
                               onPressed: (){
                                 _verifyUserAndSignIn();
                               },
-                              child:  Text('Sign in', style: TextStyle(
+                              child:  const Text('Sign in', style: TextStyle(
                                 color: Colors.black54,
                                 fontWeight: FontWeight.w500,
                                 fontSize: 12,

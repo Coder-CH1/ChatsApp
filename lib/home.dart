@@ -36,7 +36,6 @@ class _HomeState extends State<Home> {
   });
 
   socket.on('private_message', (data) {
-    print('connected to server');
     setState(() {
       _messages.add('${data['message']}: ${data['message']}');
     });
