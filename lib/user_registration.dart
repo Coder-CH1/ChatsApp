@@ -32,6 +32,7 @@ class _UserRegistrationState extends State<UserRegistration> {
        await Supabase.instance.client.auth.signInWithOtp(
         phone: phoneNumber,
       );
+       if (!mounted) return;
        ScaffoldMessenger.of(context).showSnackBar(
          const SnackBar(content: Text('Otp sent successfully: check your message')),
        );
@@ -66,6 +67,8 @@ class _UserRegistrationState extends State<UserRegistration> {
             throw profileResponse.error;
           }
           try {
+            if (mounted) return;
+            if (!mounted) return;
             Navigator.pushReplacement(context,
               MaterialPageRoute(builder: (context) => const Home()),
             );
@@ -76,11 +79,13 @@ class _UserRegistrationState extends State<UserRegistration> {
           log.warning('user authentication failed');
         }
       } else {
+          if (!mounted) return;
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(content: Text('invalid otp')),
           );
         }
       } catch (e) {
+      if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text('Error: ${e.toString()}'),)
       );
